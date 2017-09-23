@@ -36,6 +36,7 @@ PROJECT_ROOT = os.path.abspath(
 
 INSTALLED_APPS = [
     'videos',
+    'photo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -162,3 +163,7 @@ BOWER_INSTALLED_APPS = (
     "dragula.js#^3.7.2",
     "tether#^1.4.0"
 )
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

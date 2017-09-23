@@ -9,15 +9,11 @@
                 </h4>
                 <div class="todo-sidebar-section-contents">
                     <ul class="projects-list">
-                        <li>
-                            <a href="#">House Renovation</a>
+                        {% for year in year_list %}
+                        <li {% if year.year == date_list.0.year %} class="active" {% endif %}>
+                            <a href="{% url 'videos:list_year' year.year %}">{{ year.year }}</a>
                         </li>
-                        <li>
-                            <a href="#">App Development</a>
-                        </li>
-                        <li>
-                            <a href="#">Movies to Watch</a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -25,9 +21,56 @@
 
         <div class="todo-content">
             <h4 class="todo-content-header">
-                <i class="os-icon os-icon-ui-83"></i><span>nj</span>
+                <i class="os-icon os-icon-others-29"></i><span>{{ date_list.0.year }}</span>
             </h4>
-            {{ object_list }}
+
+            {% for video in object_list %}
+                <div class="element-box">
+                    <h5 class="form-header">
+                        {{ video.title }}
+                    </h5>
+                    <div class="form-desc">
+                        {{ video.video_at|date:"Y-m-d" }}
+                    </div>
+                    <div class="element-box-content">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="{{ video.get_video_url }}" allowfullscreen></iframe>
+                        </div>
+
+                        {{ video.memo }}
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% if is_paginated %}
+             <nav>
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous%}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% for i in paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="page-item active"><a class="page-link"><span>{{ i }} <span class="sr-only">(current)</span></span></a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
         </div>
     </div>
 {%  endblock %}

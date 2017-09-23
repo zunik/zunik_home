@@ -1,0 +1,7 @@
+.todo-app-w .todo-sidebar { flex : none}
+
+ul.projects-list li.active:before {content:"\e980" !important;}
+
+.menu-side-compact-w .logged-user-w .avatar-w img{ width:55px; }
+
+.logged-user-w .avatar-w { padding:2px; }

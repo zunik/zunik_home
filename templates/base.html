@@ -21,6 +21,8 @@
     <link href="{% static 'fullcalendar/dist/fullcalendar.min.css' %}" rel="stylesheet">
     <link href="{% static 'perfect-scrollbar/css/perfect-scrollbar.min.css'%}" rel="stylesheet">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mystyle.css' %}" rel="stylesheet">
+    <link href="{% static 'icon_fonts_assets/picons-social/style.css' %}" rel="stylesheet">
 </head>
 <body>
 <div class="all-wrapper menu-side">
@@ -43,7 +45,7 @@
             <div class="menu-and-user">
                 <div class="logged-user-w">
                     <div class="avatar-w">
-                        <img alt="" src="{% static 'img/avatar1.jpg' %}">
+                        <img alt="" src="{% static 'img/zunik.jpg' %}">
                     </div>
                     <div class="logged-user-info-w">
                         <div class="logged-user-name">
@@ -79,7 +81,7 @@
         <!--------------------
         END - Mobile Menu
         -------------------->
-        <div class="desktop-menu menu-side-compact-w menu-activated-on-hover">
+        <div class="desktop-menu menu-side-compact-w menu-activated-on-hover color-scheme-dark">
             <div class="logo-w">
                 <a class="logo" href="index.html"><img src="{% static 'img/logo.png' %}"></a>
             </div>
@@ -87,19 +89,19 @@
                 <div class="logged-user-w">
                     <div class="logged-user-i">
                         <div class="avatar-w">
-                            <img alt="" src="{% static 'img/avatar1.jpg' %}">
+                            <img alt="" src="{% static 'img/zunik.jpg' %}">
                         </div>
                         <div class="logged-user-menu">
                             <div class="logged-user-avatar-info">
                                 <div class="avatar-w">
-                                    <img alt="" src="{% static 'img/avatar1.jpg' %}">
+                                    <img alt="" src="{% static 'img/zunik.jpg' %}">
                                 </div>
                                 <div class="logged-user-info-w">
                                     <div class="logged-user-name">
-                                        Maria Gomez
+                                        Zunik
                                     </div>
                                     <div class="logged-user-role">
-                                        Administrator
+                                        JuHun Cha
                                     </div>
                                 </div>
                             </div>
@@ -108,19 +110,13 @@
                             </div>
                             <ul>
                                 <li>
-                                    <a href="apps_email.html"><i class="os-icon os-icon-mail-01"></i><span>Incoming Mail</span></a>
+                                    <a href="https://www.facebook.com/nik.zu.7"><i class="picons-social-icon-facebook"></i><span>Facebook</span></a>
                                 </li>
                                 <li>
-                                    <a href="users_profile_big.html"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a>
+                                    <a href="https://github.com/zunik"><i class="picons-social-icon-github"></i><span>Git Hub</span></a>
                                 </li>
                                 <li>
-                                    <a href="users_profile_small.html"><i class="os-icon os-icon-coins-4"></i><span>Billing Details</span></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="os-icon os-icon-others-43"></i><span>Notifications</span></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a>
+                                     <a href="https://www.instagram.com/zunik_cha/"><i class="picons-social-icon-instagram"></i><span>Instagram</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -147,6 +143,28 @@
                                     </li>
                                     <li>
                                         <a href="#">Favorite Videos</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="has-sub-menu">
+                        <a href="{% url 'videos:list' %}">
+                            <div class="icon-w">
+                                <i class="os-icon os-icon-ui-65"></i>
+                            </div>
+                        </a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-title">
+                                Photo
+                            </div>
+                            <div class="sub-menu-icon">
+                                <i class="os-icon os-icon-ui-65"></i>
+                            </div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="{% url 'videos:list' %}">My Photo</a>
                                     </li>
                                 </ul>
                             </div>
