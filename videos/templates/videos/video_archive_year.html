@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="todo-app-w">
+        <div class="todo-sidebar">
+            <div class="todo-sidebar-section">
+                <h4 class="todo-sidebar-section-header">
+                    Years<a class="todo-sidebar-section-toggle" href="#"><i class="os-icon os-icon-ui-23"></i></a>
+                </h4>
+                <div class="todo-sidebar-section-contents">
+                    <ul class="projects-list">
+                        <li>
+                            <a href="#">House Renovation</a>
+                        </li>
+                        <li>
+                            <a href="#">App Development</a>
+                        </li>
+                        <li>
+                            <a href="#">Movies to Watch</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="todo-content">
+            <h4 class="todo-content-header">
+                <i class="os-icon os-icon-ui-83"></i><span>nj</span>
+            </h4>
+            {{ object_list }}
+        </div>
+    </div>
+{%  endblock %}
