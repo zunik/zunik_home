@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="element-wrapper">
+        <h6 class="element-header">
+            Photo View
+        </h6>
+        <div class="element-box">
+            <h5 class="form-header">
+                {{ object.title }}
+            </h5>
+            <div class="form-desc">
+                <i class="fa fa-calendar"></i> {{ object.photo_at|date:"Y" }}
+            </div>
+            <div class="element-box-content">
+                <img src="{{ object.photo.url }}" class="rounded mx-auto d-block img-fluid"> <br />
+                {{ object.memo }}
+            </div>
+        </div>
+    </div>
+{%  endblock %}

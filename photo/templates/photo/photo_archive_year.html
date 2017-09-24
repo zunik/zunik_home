@@ -11,7 +11,7 @@
                     <ul class="projects-list">
                         {% for year in year_list %}
                         <li {% if year.year == date_list.0.year %} class="active" {% endif %}>
-                            <a href="{% url 'videos:list_year' year.year %}">{{ year.year }}</a>
+                            <a href="{% url 'photo:list_year' year.year %}">{{ year.year }}</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -23,24 +23,15 @@
             <h4 class="todo-content-header">
                 <i class="os-icon os-icon-others-29"></i><span>{{ now_year }}</span>
             </h4>
-
+            <div class="row">
             {% for object in object_list %}
-                <div class="element-box">
-                    <h5 class="form-header">
-                        {{ object.title }}
-                    </h5>
-                    <div class="form-desc">
-                        <i class="fa fa-calendar"></i> {{ object.video_at|date:"Y-m-d" }}
-                    </div>
-                    <div class="element-box-content">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="{{ object.get_video_url }}" allowfullscreen></iframe>
-                        </div>
-
-                        {{ object.memo }}
-                    </div>
+                <div class="col-md-3 col-sm-4 col-xs-6">
+                    <a href="{% url 'photo:detail_view' object.id %}">
+                        <img src="{{ object.thumbnail.url }}" class="img-thumbnail" data-placement="bottom" data-toggle="tooltip" title="{{ object.title }}">
+                    </a>
                 </div>
             {% endfor %}
+            </div>
 
             {% if is_paginated %}
              <nav>

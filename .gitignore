@@ -2,3 +2,4 @@ __pycache__
 node_modules/
 components/
 static/icon_fonts_assets/
+media/

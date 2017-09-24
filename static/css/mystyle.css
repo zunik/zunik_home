@@ -5,3 +5,5 @@ ul.projects-list li.active:before {content:"\e980" !important;}
 .menu-side-compact-w .logged-user-w .avatar-w img{ width:55px; }
 
 .logged-user-w .avatar-w { padding:2px; }
+
+.img-thumbnail:hover{border:1px solid skyblue; box-sizing:border-box; cursor:pointer;}

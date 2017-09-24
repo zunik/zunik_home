@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect, reverse
+from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.dates import YearArchiveView
 from django.db.models import Q
@@ -13,6 +13,7 @@ class MyVideoYearView(YearArchiveView):
 
     def get_context_data(self, **kwargs):
         contact = super(MyVideoYearView, self).get_context_data(**kwargs)
+        contact['now_year'] = self.get_year()
         contact['year_list'] = Video.objects.dates('video_at', 'year', order='DESC')
         return contact
 

@@ -23,6 +23,7 @@
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
     <link href="{% static 'css/mystyle.css' %}" rel="stylesheet">
     <link href="{% static 'icon_fonts_assets/picons-social/style.css' %}" rel="stylesheet">
+    <link href="{% static 'icon_fonts_assets/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
 </head>
 <body>
 <div class="all-wrapper menu-side">
@@ -149,7 +150,7 @@
                         </div>
                     </li>
                     <li class="has-sub-menu">
-                        <a href="{% url 'videos:list' %}">
+                        <a href="{% url 'photo:list' %}">
                             <div class="icon-w">
                                 <i class="os-icon os-icon-ui-65"></i>
                             </div>
@@ -164,7 +165,7 @@
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li>
-                                        <a href="{% url 'videos:list' %}">My Photo</a>
+                                        <a href="{% url 'photo:list' %}">My Photo</a>
                                     </li>
                                 </ul>
                             </div>
