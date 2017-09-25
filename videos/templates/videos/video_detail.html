@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="element-wrapper">
+        <h6 class="element-header">
+            Video View
+        </h6>
+        <div class="element-box">
+            <h5 class="form-header">
+                {{ object.title }}
+            </h5>
+            <div class="form-desc">
+                <i class="fa fa-calendar"></i> {{ object.video_at|date:"Y-m-d" }}
+            </div>
+            <div class="element-box-content mb-5">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{ object.get_video_url }}" allowfullscreen></iframe>
+                </div>
+
+                {{ object.memo }}
+            </div>
+            <div>
+                {% load disqus_tags %}
+                {% disqus_show_comments %}
+            </div>
+        </div>
+    </div>
+{%  endblock %}

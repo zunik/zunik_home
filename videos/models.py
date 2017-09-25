@@ -6,7 +6,6 @@ class Video(models.Model):
     video_id = models.CharField(max_length=255)
     memo = models.TextField(null=True, blank=True)
     video_at = models.DateField()
-    video_type = models.CharField(max_length=50, default='youtube')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     hide = models.BooleanField(default=False)
@@ -15,8 +14,7 @@ class Video(models.Model):
         return self.title
 
     def get_video_url(self):
-        if self.video_type == 'youtube':
-            return "//www.youtube.com/embed/" + self.video_id + "?rel=0"
-        elif self.video_type == 'naver':
-            return "//serviceapi.rmcnmv.naver.com/flash/outKeyPlayer.nhn?" + self.video_id + \
-                   "&controlBarMovable=true&jsCallable=true&isAutoPlay=true&skinName=tvcast_white"
+        return "//www.youtube.com/embed/" + self.video_id + "?rel=0"
+
+    def get_video_thumbnail(self):
+        return "//img.youtube.com/vi/" + self.video_id + "/hqdefault.jpg"

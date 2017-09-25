@@ -5,13 +5,13 @@
         <div class="todo-sidebar">
             <div class="todo-sidebar-section">
                 <h4 class="todo-sidebar-section-header">
-                    Years<a class="todo-sidebar-section-toggle" href="#"><i class="os-icon os-icon-ui-23"></i></a>
+                    <span>Year</span><i class="os-icon os-icon-basic-2-259-calendar"></i><a class="todo-sidebar-section-toggle" href="#"><i class="os-icon os-icon-ui-23"></i></a>
                 </h4>
                 <div class="todo-sidebar-section-contents">
                     <ul class="projects-list">
                         {% for year in year_list %}
                         <li {% if year.year == date_list.0.year %} class="active" {% endif %}>
-                            <a href="{% url 'videos:list_year' year.year %}">{{ year.year }}</a>
+                            <a href="{% url 'video:list_year' year.year %}">{{ year.year }}</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -24,23 +24,16 @@
                 <i class="os-icon os-icon-others-29"></i><span>{{ now_year }}</span>
             </h4>
 
+           <div class="row mb-3">
             {% for object in object_list %}
-                <div class="element-box">
-                    <h5 class="form-header">
-                        {{ object.title }}
-                    </h5>
-                    <div class="form-desc">
-                        <i class="fa fa-calendar"></i> {{ object.video_at|date:"Y-m-d" }}
-                    </div>
-                    <div class="element-box-content">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="{{ object.get_video_url }}" allowfullscreen></iframe>
-                        </div>
-
-                        {{ object.memo }}
-                    </div>
+                <div class="col-md-4 col-sm-6 col-12 mb-2">
+                    <a href="{% url 'video:detail_view' object.id %}">
+                        <img src="{{ object.get_video_thumbnail }}" class="img-thumbnail  img-fluid" data-placement="bottom" data-toggle="tooltip" title="{{ object.title }}">
+                    </a>
+                    <div class="p-1 text-overflow"><a>{{ object.title }}</a></div>
                 </div>
             {% endfor %}
+            </div>
 
             {% if is_paginated %}
              <nav>
