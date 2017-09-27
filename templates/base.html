@@ -69,7 +69,7 @@
                             <span>Video</span></a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="{% url 'videos:list' %}">My Video</a>
+                                <a href="{% url 'video:list' %}">My Video</a>
                             </li>
                         </ul>
                     </li>
@@ -111,13 +111,13 @@
                             </div>
                             <ul>
                                 <li>
-                                    <a href="https://www.facebook.com/nik.zu.7"><i class="picons-social-icon-facebook"></i><span>Facebook</span></a>
+                                    <a href="https://www.facebook.com/nik.zu.7" target="_blank"><i class="picons-social-icon-facebook"></i><span>Facebook</span></a>
                                 </li>
                                 <li>
-                                    <a href="https://github.com/zunik"><i class="picons-social-icon-github"></i><span>Git Hub</span></a>
+                                    <a href="https://github.com/zunik" target="_blank"><i class="picons-social-icon-github"></i><span>Git Hub</span></a>
                                 </li>
                                 <li>
-                                     <a href="https://www.instagram.com/zunik_cha/"><i class="picons-social-icon-instagram"></i><span>Instagram</span></a>
+                                     <a href="https://www.instagram.com/zunik_cha/" target="_blank"><i class="picons-social-icon-instagram"></i><span>Instagram</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -125,7 +125,29 @@
                 </div>
                 <ul class="main-menu">
                     <li class="has-sub-menu">
-                        <a href="{% url 'videos:list' %}">
+                        <a href="{% url 'video:list' %}">
+                            <div class="icon-w">
+                                <i class="os-icon os-icon-pencil-1"></i>
+                            </div>
+                        </a>
+                        <div class="sub-menu-w">
+                            <div class="sub-menu-title">
+                                Diary
+                            </div>
+                            <div class="sub-menu-icon">
+                                <i class="os-icon os-icon-pencil-1"></i>
+                            </div>
+                            <div class="sub-menu-i">
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="{% url 'video:list' %}">My Diary</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="has-sub-menu">
+                        <a href="{% url 'video:list' %}">
                             <div class="icon-w">
                                 <i class="os-icon os-icon-others-29"></i>
                             </div>
@@ -140,7 +162,7 @@
                             <div class="sub-menu-i">
                                 <ul class="sub-menu">
                                     <li>
-                                        <a href="{% url 'videos:list' %}">My Videos</a>
+                                        <a href="{% url 'video:list' %}">My Videos</a>
                                     </li>
                                     <li>
                                         <a href="#">Favorite Videos</a>

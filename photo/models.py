@@ -9,7 +9,7 @@ class Photo(models.Model):
     photo = models.ImageField(upload_to="photo", width_field="width_field", height_field="height_field")
     thumbnail = ImageSpecField(
         source = 'photo',
-        processors = [Thumbnail(200, 200)],
+        processors = [Thumbnail(250, 250)],
         format = 'JPEG',
         options = {'quality': 60}
     )

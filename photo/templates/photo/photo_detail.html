@@ -12,9 +12,13 @@
             <div class="form-desc">
                 <i class="fa fa-calendar"></i> {{ object.photo_at|date:"Y" }}
             </div>
-            <div class="element-box-content">
+            <div class="element-box-content mb-5">
                 <img src="{{ object.photo.url }}" class="rounded mx-auto d-block img-fluid"> <br />
                 {{ object.memo }}
+            </div>
+            <div>
+                {% load disqus_tags %}
+                {% disqus_show_comments %}
             </div>
         </div>
     </div>

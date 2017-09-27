@@ -1,4 +1,5 @@
 from django.db import models
+from tagging.fields import TagField
 
 
 class Video(models.Model):
@@ -9,6 +10,7 @@ class Video(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     hide = models.BooleanField(default=False)
+    tag = TagField()
 
     def __str__(self):
         return self.title

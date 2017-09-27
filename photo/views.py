@@ -1,7 +1,14 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from .models import Photo
 from django.views.generic.dates import YearArchiveView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
+
+
+def my_photo_redirect(request):
+    last_photo = Photo.objects.latest('photo_at')
+    year = last_photo.photo_at.year
+
+    return HttpResponseRedirect(reverse('photo:list_year', args=(year, )))
 
 
 class MyPhotoYearView(YearArchiveView):
@@ -15,13 +22,6 @@ class MyPhotoYearView(YearArchiveView):
         contact['now_year'] = self.get_year()
         contact['year_list'] = Photo.objects.dates('photo_at', 'year', order='DESC')
         return contact
-
-
-def my_photo_redirect(request):
-    last_photo = Photo.objects.latest('photo_at')
-    year = last_photo.photo_at.year
-
-    return HttpResponseRedirect(reverse('photo:list_year', args=(year, )))
 
 
 class MyPhotoDetailView(DetailView):

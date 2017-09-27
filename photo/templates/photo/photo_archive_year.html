@@ -5,7 +5,7 @@
         <div class="todo-sidebar">
             <div class="todo-sidebar-section">
                 <h4 class="todo-sidebar-section-header">
-                    Years<a class="todo-sidebar-section-toggle" href="#"><i class="os-icon os-icon-ui-23"></i></a>
+                    <span>Year</span><i class="os-icon os-icon-basic-2-259-calendar"></i><a class="todo-sidebar-section-toggle" href="#"><i class="os-icon os-icon-ui-23"></i></a>
                 </h4>
                 <div class="todo-sidebar-section-contents">
                     <ul class="projects-list">
@@ -23,11 +23,11 @@
             <h4 class="todo-content-header">
                 <i class="os-icon os-icon-others-29"></i><span>{{ now_year }}</span>
             </h4>
-            <div class="row">
+            <div class="row mb-5">
             {% for object in object_list %}
-                <div class="col-md-3 col-sm-4 col-xs-6">
+                <div class="col-md-3 col-sm-4 col-6 mb-2">
                     <a href="{% url 'photo:detail_view' object.id %}">
-                        <img src="{{ object.thumbnail.url }}" class="img-thumbnail" data-placement="bottom" data-toggle="tooltip" title="{{ object.title }}">
+                        <img src="{{ object.thumbnail.url }}" class="img-thumbnail  img-fluid" data-placement="bottom" data-toggle="tooltip" title="{{ object.title }}">
                     </a>
                 </div>
             {% endfor %}

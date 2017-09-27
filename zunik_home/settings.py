@@ -35,16 +35,22 @@ PROJECT_ROOT = os.path.abspath(
 # Application definition
 
 INSTALLED_APPS = [
-    'videos',
-    'photo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'videos.apps.VideosConfig',
+    'photo.apps.PhotoConfig',
     'djangobower',
+    'disqus',
+    'django.contrib.sites',
+    'tagging.apps.TaggingConfig',
 ]
+
+DISQUS_WEBSITE_SHORTNAME = 'djangozunik'
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
