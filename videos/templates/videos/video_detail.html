@@ -18,6 +18,19 @@
                 </div>
 
                 {{ object.memo }}
+                <div class="mt-5">
+                    {% load tagging_tags %}
+                    {% tags_for_object object as tags %}
+
+                    {% if tags %}
+                        <strong>Tags : </strong>
+                        {% for tag in tags %}
+                            <span class="badge badge-pill badge-info p-2">
+                                <a href="{% url 'video:list_tag' tag %}">{{ tag.name }}</a>
+                            </span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
             </div>
             <div>
                 {% load disqus_tags %}

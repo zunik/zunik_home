@@ -26,13 +26,15 @@
                                 <ul class="items-list filter-list">
                                     {% for year in year_list %}
                                         <li>
-                                            {% if now_year and year.year == now_year %}
+                                            {% if now_year == year.year %}
                                                 <a href="#" class="active">
                                                     <i class="os-icon os-icon-checkmark"></i>
                                                     {{ year.year }} 년
+                                                     <span class="badge badge-pill badge-info">+{{ year.count }}</span>
                                                 </a>
                                             {% else %}
                                                 <a href="{% url 'video:list_year' year.year %}">{{ year.year }} 년</a>
+                                                <span class="badge badge-pill badge-info">+{{ year.count }}</span>
                                             {% endif %}
                                         </li>
                                     {% endfor %}
@@ -92,7 +94,8 @@
                             <a href="{% url 'video:detail_view' object.id %}">
                                 <img src="{{ object.get_video_thumbnail }}" class="img-thumbnail  img-fluid" data-placement="bottom" data-toggle="tooltip" title="{{ object.title }}">
                             </a>
-                            <div class="p-1 text-overflow"><a>{{ object.title }}</a></div>
+                            <div class="p-1 text-overflow"><a href="{% url 'video:detail_view' object.id %}">{{ object.title }}</a></div>
+                            <div class="list_date_view">{{ object.video_at|date:"Y-m-d" }}</div>
                         </div>
                     {% endfor %}
                 </div>

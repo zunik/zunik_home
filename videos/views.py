@@ -15,7 +15,16 @@ class MyVideoYearView(YearArchiveView):
     def get_context_data(self, **kwargs):
         contact = super(MyVideoYearView, self).get_context_data(**kwargs)
         contact['now_year'] = int(self.get_year())
-        contact['year_list'] = Video.objects.dates('video_at', 'year', order='DESC')
+        contact['year_list'] = list(Video.objects.dates('video_at', 'year', order='DESC'))
+
+        i = 0
+        for date in contact['year_list']:
+            year = contact['year_list'][i].year
+            contact['year_list'][i] = {}
+            contact['year_list'][i]['year'] = year
+            contact['year_list'][i]['count'] = Video.objects.filter(video_at__year = date.year).count()
+            i = i + 1
+
         contact['list_type'] = 'year'
         return contact
 
@@ -24,10 +33,20 @@ class MyVideoTagView(TaggedObjectList):
     model = Video
     paginate_by = 15
     template_name = 'videos/video_list.html'
+    ordering = ["-video_at"]
 
     def get_context_data(self, **kwargs):
         contact = super(MyVideoTagView, self).get_context_data(**kwargs)
-        contact['year_list'] = Video.objects.dates('video_at', 'year', order='DESC')
+        contact['year_list'] = list(Video.objects.dates('video_at', 'year', order='DESC'))
+
+        i = 0
+        for date in contact['year_list']:
+            year = contact['year_list'][i].year
+            contact['year_list'][i] = {}
+            contact['year_list'][i]['year'] = year
+            contact['year_list'][i]['count'] = Video.objects.filter(video_at__year=date.year).count()
+            i = i + 1
+
         contact['now_tag'] = contact['tag']
         contact['list_type'] = 'tag'
         del(contact['tag'])
