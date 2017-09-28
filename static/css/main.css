@@ -17429,9 +17429,11 @@ Contents:
   .activity-boxes-w .activity-box-w:after {
     left: 70px;
   }
+  /*
   .profile-tile .profile-tile-box {
     width: 95px;
   }
+  */
   .profile-tile .pt-avatar-w img {
     width: 50px;
   }

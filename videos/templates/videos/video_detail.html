@@ -1,41 +1,79 @@
 {% extends 'base.html' %}
 
+{% block main_class %}with-side-panel{% endblock %}
+
 {% block content %}
-    <div class="element-wrapper">
-        <h6 class="element-header">
-            My Video View
-        </h6>
-        <div class="element-box">
-            <h5 class="form-header">
-                {{ object.title }}
-            </h5>
-            <div class="form-desc">
-                <i class="fa fa-calendar"></i> {{ object.video_at|date:"Y-m-d" }}
-            </div>
-            <div class="element-box-content mb-5">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="{{ object.get_video_url }}" allowfullscreen></iframe>
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header">
+                My Video View
+            </h6>
+            <div class="element-box">
+                <h5 class="form-header">
+                    {{ object.title }}
+                </h5>
+                <div class="form-desc">
+                    <i class="fa fa-calendar"></i> {{ object.video_at|date:"Y-m-d" }}
                 </div>
+                <div class="element-box-content mb-5">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="{{ object.get_video_url }}" allowfullscreen></iframe>
+                    </div>
 
-                {{ object.memo }}
-                <div class="mt-5">
-                    {% load tagging_tags %}
-                    {% tags_for_object object as tags %}
+                    {{ object.memo }}
+                    <div class="mt-5">
+                        {% load tagging_tags %}
+                        {% tags_for_object object as tags %}
 
-                    {% if tags %}
-                        <strong>Tags : </strong>
-                        {% for tag in tags %}
-                            <span class="badge badge-pill badge-info p-2">
+                        {% if tags %}
+                            <strong>Tags : </strong>
+                            {% for tag in tags %}
+                                <span class="badge badge-pill badge-info p-2">
                                 <a href="{% url 'video:list_tag' tag %}">{{ tag.name }}</a>
                             </span>
-                        {% endfor %}
-                    {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-            <div>
-                {% load disqus_tags %}
-                {% disqus_show_comments %}
+                <div>
+                    {% load disqus_tags %}
+                    {% disqus_show_comments %}
+                </div>
             </div>
         </div>
     </div>
+
+    {% if next_video_list %}
+    <div class="content-panel">
+        <div class="content-panel-close">
+            <i class="os-icon os-icon-close"></i>
+        </div>
+        <div class="element-wrapper">
+            <h6 class="element-header">
+                다음 동영상
+            </h6>
+            <div class="element-box-tp next_video_wrap">
+                {% for next_video in next_video_list %}
+                <div class="profile-tile">
+                    <div class="profile-tile-box p-0">
+                        <a href="{% url 'video:detail_view' next_video.id %}">
+                            <img alt="{{ next_video.title }}" class="img-thumbnail  img-fluid" src="{{ next_video.get_video_thumbnail }}">
+                        </a>
+                    </div>
+                    <div class="profile-tile-meta">
+                        <ul>
+                            <li>
+                                <strong><a href="{% url 'video:detail_view' next_video.id %}">{{ next_video.title }}</a></strong>
+                            </li>
+                            <li>
+                                {{ next_video.video_at|date:"Y-m-d" }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
 {%  endblock %}

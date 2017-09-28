@@ -26,7 +26,7 @@
     <link href="{% static 'icon_fonts_assets/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
 </head>
 <body>
-<div class="all-wrapper menu-side">
+<div class="all-wrapper menu-side {% block main_class %} {% endblock %}">
     <div class="layout-w">
         <!--------------------
         START - Mobile Menu
@@ -215,9 +215,7 @@
             END - Breadcrumbs
             -------------------->
             <div class="content-i">
-                <div class="content-box">
-                    {%  block content %}{% endblock %}
-                </div>
+                {%  block content %}{% endblock %}
             </div>
         </div>
     </div>

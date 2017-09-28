@@ -18,10 +18,10 @@ class MyPhotoYearView(YearArchiveView):
     paginate_by = 20
 
     def get_context_data(self, **kwargs):
-        contact = super(MyPhotoYearView, self).get_context_data(**kwargs)
-        contact['now_year'] = self.get_year()
-        contact['year_list'] = Photo.objects.dates('photo_at', 'year', order='DESC')
-        return contact
+        context = super(MyPhotoYearView, self).get_context_data(**kwargs)
+        context['now_year'] = self.get_year()
+        context['year_list'] = Photo.objects.dates('photo_at', 'year', order='DESC')
+        return context
 
 
 class MyPhotoDetailView(DetailView):
