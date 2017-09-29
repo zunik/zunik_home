@@ -12,6 +12,9 @@ class Video(models.Model):
     hide = models.BooleanField(default=False)
     tag = TagField()
 
+    class Meta:
+        ordering = ['-video_at']
+
     def __str__(self):
         return self.title
 

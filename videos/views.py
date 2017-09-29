@@ -34,7 +34,6 @@ class MyVideoTagView(TaggedObjectList):
     model = Video
     paginate_by = 15
     template_name = 'videos/video_list.html'
-    ordering = ["-video_at"]
 
     def get_context_data(self, **kwargs):
         context = super(MyVideoTagView, self).get_context_data(**kwargs)
@@ -67,7 +66,7 @@ class MyVideoDetailView(DetailView):
 
         # tags 관련 영상을 뽑아도 개수에 충족하지 못 한다면 최근거에서 부족한 만큼 가져오기
         if next_video_plus_count != 0:
-            context['next_video_list'].extend(self.model.objects.exclude(pk=context['object'].id).order_by('-video_at')
+            context['next_video_list'].extend(self.model.objects.exclude(pk=context['object'].id)
                                               .all()[:next_video_plus_count])
         return context
 
