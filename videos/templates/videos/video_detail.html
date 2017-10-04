@@ -36,7 +36,11 @@
                     </div>
                 </div>
                 <div>
+                    <button type="button" class="btn btn-secondary btn-sm align-self-end">목록</button>
+                </div>
+                <div>
                     {% load disqus_tags %}
+                    {% set_disqus_identifier "zunik_home_video_" object.get_id_string_format %}
                     {% disqus_show_comments %}
                 </div>
             </div>

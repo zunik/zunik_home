@@ -92,10 +92,10 @@
                     <div class="row mb-3">
                         {% for object in object_list %}
                             <div class="col-md-4 col-sm-6 col-12 mb-2">
-                                <a href="{% url 'video:detail_view' object.id %}">
+                                <a href="{{ object.get_absolute_url }}">
                                     <img src="{{ object.get_video_thumbnail }}" class="img-thumbnail  img-fluid" data-placement="bottom" data-toggle="tooltip" title="{{ object.title }}">
                                 </a>
-                                <div class="p-1 text-overflow"><a href="{% url 'video:detail_view' object.id %}">{{ object.title }}</a></div>
+                                <div class="p-1 text-overflow"><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></div>
                                 <div class="list_date_view">{{ object.video_at|date:"Y-m-d" }}</div>
                             </div>
                         {% endfor %}

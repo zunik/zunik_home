@@ -1,5 +1,6 @@
 from django.db import models
 from tagging.fields import TagField
+from django.urls import reverse
 
 
 class Video(models.Model):
@@ -18,8 +19,15 @@ class Video(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def get_absolute_url(self):
+        return reverse('video:detail_view', args=[str(self.id)])
+
     def get_video_url(self):
         return "//www.youtube.com/embed/" + self.video_id + "?rel=0"
 
     def get_video_thumbnail(self):
         return "//img.youtube.com/vi/" + self.video_id + "/hqdefault.jpg"
+
+    def get_id_string_format(self):
+        return str(self.id)
