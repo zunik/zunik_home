@@ -35,9 +35,10 @@
                         {% endif %}
                     </div>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-secondary btn-sm align-self-end">목록</button>
+                <div class="text-right">
+                    <a href="{% url 'video:list' %}" class="btn btn-secondary btn-sm">목록으로</a>
                 </div>
+
                 <div>
                     {% load disqus_tags %}
                     {% set_disqus_identifier "zunik_home_video_" object.get_id_string_format %}
