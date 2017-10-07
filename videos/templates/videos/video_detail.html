@@ -19,8 +19,10 @@
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" src="{{ object.get_video_url }}" allowfullscreen></iframe>
                     </div>
-
-                    {{ object.memo }}
+                    <div class="mt-2 markdown-body">
+                        {% load markdown_deux_tags %}
+                        {{ object.memo|markdown }}
+                    </div>
                     <div class="mt-5">
                         {% load tagging_tags %}
                         {% tags_for_object object as tags %}

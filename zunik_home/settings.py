@@ -41,12 +41,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'videos.apps.VideosConfig',
-    'photo.apps.PhotoConfig',
+    # third party
     'djangobower',
     'disqus',
     'django.contrib.sites',
     'tagging.apps.TaggingConfig',
+    'markdown_deux',
+    'pagedown',
+    # local apps
+    'videos.apps.VideosConfig',
+    'photo.apps.PhotoConfig',
+    'diary.apps.DiaryConfig',
 ]
 
 DISQUS_WEBSITE_SHORTNAME = 'djangozunik'
@@ -67,8 +72,7 @@ ROOT_URLCONF = 'zunik_home.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -167,7 +171,8 @@ BOWER_INSTALLED_APPS = (
     "perfect-scrollbar#^0.7.0",
     "slick-carousel#^1.6.0",
     "dragula.js#^3.7.2",
-    "tether#^1.4.0"
+    "tether#^1.4.0",
+    "github-markdown-css"
 )
 
 MEDIA_URL = '/media/'

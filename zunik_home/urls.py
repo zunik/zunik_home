@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^video/', include('videos.urls')),
     url(r'^photo/', include('photo.urls')),
+    url(r'^diary/', include('diary.urls')),
 ]
 
 if settings.DEBUG:

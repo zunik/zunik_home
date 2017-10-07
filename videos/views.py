@@ -1,6 +1,6 @@
 from django.shortcuts import HttpResponseRedirect, reverse
 from django.views.generic.dates import YearArchiveView
-from django.views.generic import DetailView,ListView
+from django.views.generic import DetailView
 from tagging.views import TaggedObjectList
 from tagging.models import TaggedItem
 from .models import Video

@@ -1,15 +1,15 @@
 from django.contrib import admin
 from django.db import models
-from .models import Video
+from .models import Diary
 
 from pagedown.widgets import AdminPagedownWidget
 
 
-class VideoAdmin(admin.ModelAdmin):
+class DiaryAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {'widget': AdminPagedownWidget},
     }
-    list_filter = ['video_at']
+    list_filter = ['diary_at']
     search_fields = ['title']
 
-admin.site.register(Video, VideoAdmin)
+admin.site.register(Diary, DiaryAdmin)
