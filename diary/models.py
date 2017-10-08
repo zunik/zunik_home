@@ -1,5 +1,6 @@
 from django.db import models
 from tagging.fields import TagField
+from django.urls import reverse
 
 
 class Diary(models.Model):
@@ -13,3 +14,10 @@ class Diary(models.Model):
 
     class Meta:
         ordering = ['-diary_at']
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def get_absolute_url(self):
+        return reverse('diary:detail_view', args=[str(self.id)])

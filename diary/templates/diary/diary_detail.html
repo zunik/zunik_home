@@ -6,22 +6,19 @@
     <div class="content-box">
         <div class="element-wrapper">
             <h6 class="element-header">
-                My Video View
+                Diary View
             </h6>
             <div class="element-box">
                 <h5 class="form-header">
                     {{ object.title }}
                 </h5>
                 <div class="form-desc">
-                    <i class="fa fa-calendar"></i> {{ object.video_at|date:"Y-m-d" }}
+                    <i class="fa fa-calendar"></i> {{ object.diary_at|date:"Y-m-d" }}
                 </div>
                 <div class="element-box-content mb-5">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="{{ object.get_video_url }}" allowfullscreen></iframe>
-                    </div>
                     <div class="mt-2 markdown-body">
                         {% load markdown_deux_tags %}
-                        {{ object.memo|markdown }}
+                        {{ object.content|markdown }}
                     </div>
                     <div class="mt-5">
                         {% load tagging_tags %}
@@ -37,13 +34,13 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="text-right">
-                    <a href="{% url 'video:list' %}" class="btn btn-secondary btn-sm">목록으로</a>
+                <div class="text-right mt-3 mb-3">
+                    <a href="{% url 'diary:list' %}" class="btn btn-secondary btn-sm">목록으로</a>
                 </div>
 
                 <div>
                     {% load disqus_tags %}
-                    {% set_disqus_identifier "zunik_my_video_" object.get_id_string_format %}
+                    {% set_disqus_identifier "zunik_diary_" object.get_id_string_format %}
                     {% disqus_show_comments %}
                 </div>
             </div>
