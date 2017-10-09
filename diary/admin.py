@@ -11,5 +11,6 @@ class DiaryAdmin(admin.ModelAdmin):
     }
     list_filter = ['diary_at']
     search_fields = ['title']
+    list_display = ['title', 'diary_at']
 
 admin.site.register(Diary, DiaryAdmin)

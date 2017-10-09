@@ -21,3 +21,6 @@ class Diary(models.Model):
     @property
     def get_absolute_url(self):
         return reverse('diary:detail_view', args=[str(self.id)])
+
+    def get_id_string_format(self):
+        return str(self.id)

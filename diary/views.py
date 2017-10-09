@@ -23,6 +23,7 @@ class DiaryYearView(YearArchiveView):
             context['year_list'][i] = {}
             context['year_list'][i]['year'] = year
             context['year_list'][i]['count'] = Diary.objects.filter(diary_at__year = date.year).count()
+            i = i + 1
 
         context['list_type'] = 'year'
         return context
