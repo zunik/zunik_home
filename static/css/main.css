@@ -12975,7 +12975,7 @@ strong {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  padding-left: 30px;
+  padding-left: 20px; /* custom zunik */
 }
 
 .profile-tile .profile-tile-meta ul {
@@ -17353,7 +17353,7 @@ Contents:
   }
   .content-panel {
     padding: 2rem;
-    width: 350px;
+    width: 330px; /* custom zunik */
   }
   .content-box {
     padding: 2rem;
@@ -17379,8 +17379,9 @@ Contents:
   .menu-side-w ul.sub-menu {
     padding-left: 45px;
   }
+  /* custom zunik */
   .menu-side-w {
-    width: 260px;
+    width: 230px;
   }
   .menu-side-w .logged-user-menu ul {
     padding-left: 30px;
@@ -17445,7 +17446,8 @@ Contents:
 /* #5.  Screen size <= 1400px */
 @media (max-width: 1400px) {
   .menu-side-w {
-    width: 230px;
+    /* custom zunik */
+    width: 200px;
   }
   .menu-side-w .side-menu-magic {
     padding: 30px 20px;
