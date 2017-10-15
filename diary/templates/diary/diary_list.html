@@ -97,9 +97,16 @@
                             <div class="tasks-header-w">
                                 <a class="tasks-header-toggler" href="#"><i class="os-icon os-icon-ui-23"></i></a>
                                 <h5 class="tasks-header">
-                                    <a href="{{ object.get_absolute_url }}"><strong>{{ object.title }}</strong></a>
+                                    <strong>
+                                        <a href="{{ object.get_absolute_url }}">
+                                            {{ object.title }}
+                                        </a>
+                                        {% if 'video-md' in object.content %}
+                                            <i class="fa fa-play-circle-o" title="영상 포함" alt="영상 포함"></i>
+                                        {% endif %}
+                                    </strong>
                                 </h5>
-                                <span class="tasks-sub-header">{{ object.diary_at|date:"Y-m-d" }}</span>
+                                <span class="tasks-sub-header"><i class="fa fa-calendar"></i> {{ object.diary_at|date:"Y-m-d" }}</span>
                             </div>
                             <div class="tasks-list-w">
                                 <div class="markdown-body">

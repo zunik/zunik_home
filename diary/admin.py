@@ -10,7 +10,7 @@ class DiaryAdmin(admin.ModelAdmin):
         models.TextField: {'widget': AdminPagedownWidget},
     }
     list_filter = ['diary_at']
-    search_fields = ['title']
-    list_display = ['title', 'diary_at']
+    search_fields = ['title', 'content']
+    list_display = ['title', 'diary_at', 'hide']
 
 admin.site.register(Diary, DiaryAdmin)

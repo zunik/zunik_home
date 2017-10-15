@@ -16,7 +16,7 @@
                     <i class="fa fa-calendar"></i> {{ object.diary_at|date:"Y-m-d" }}
                 </div>
                 <div class="element-box-content mb-5">
-                    <div class="mt-2 markdown-body youtube-md">
+                    <div class="mt-2 markdown-body video-md-convert">
                         {% load markdown_deux_tags %}
                         {{ object.content|markdown }}
                     </div>
@@ -28,7 +28,7 @@
                             <strong>Tags : </strong>
                             {% for tag in tags %}
                                 <span class="badge badge-pill badge-info p-2">
-                                <a href="{% url 'video:list_tag' tag %}">{{ tag.name }}</a>
+                                <a href="{% url 'diary:list_tag' tag %}">{{ tag.name }}</a>
                             </span>
                             {% endfor %}
                         {% endif %}
