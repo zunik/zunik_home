@@ -1,18 +1,19 @@
 $(function(){
-    var $video_markdown = $(".video-md-convert div.video-md")
+    var $embed_markdown = $(".embed-md-convert div.embed-md")
 
-    if ($video_markdown.length > 0) {
-         var video_before = "<div class='row justify-content-md-center'>" +
-        "<div class='embed-responsive embed-responsive-16by9 col-md-6'>" +
-        "<iframe class='embed-responsive-item' src='";
+    if ($embed_markdown.length > 0) {
+        var embed_before = "<div class='row justify-content-md-center'><div class='embed-responsive embed-responsive-";
+        var embed_before2 = " col-md-6'><iframe class='embed-responsive-item' src='";
+        var embed_after = "' allowfullscreen></iframe></div></div>";
 
-        var video_after = "' allowfullscreen></iframe></div></div>";
+        // size 21by9, 16by9, 4by3, 1by1
 
-        $video_markdown.each(function () {
-            var video_type = $(this).attr("data-type")
-            var video_id = $(this).attr("data-id")
+        $embed_markdown.each(function () {
+            var embed_type = $(this).attr("data-type")
+            var embed_id = $(this).attr("data-id")
+            var embed_size = '16by9'
 
-            if (video_type == 'youtube') {
+            if (embed_type == 'youtube') {
                 var query_string = '?rel=0'
 
                 if ($(this).is('[data-start]')) {
@@ -20,18 +21,23 @@ $(function(){
                 }
 
                 if ($(this).is('[data-end]')) {
-                    query_string += '&start=' + $(this).attr("data-end")
+                    query_string += '&end=' + $(this).attr("data-end")
                 }
 
-                var video_src = "//www.youtube.com/embed/" + video_id + query_string;
-            } else if (video_type == 'naver') {
-                var video_key = $(this).attr("data-key")
+                var embed_src = "//www.youtube.com/embed/" + embed_id + query_string;
+            } else if (embed_type == 'naver') {
+                var embed_key = $(this).attr("data-key")
 
-                var video_src = "//serviceapi.rmcnmv.naver.com/flash/outKeyPlayer.nhn?vid=" + video_id + "&outKey=" + video_key + "&controlBarMovable=true&jsCallable=true&isAutoPlay=true&skinName=tvcast_white"
+                var embed_src = "//serviceapi.rmcnmv.naver.com/flash/outKeyPlayer.nhn?vid=" + embed_id + "&outKey=" + embed_key + "&controlBarMovable=true&jsCallable=true&isAutoPlay=true&skinName=tvcast_white"
+            } else if (embed_type == 'sound_cloud') {
+                embed_size = '4by3'
+
+                var embed_src = "//w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + embed_id +
+                    "&amp;color=%230066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true"
             }
 
             $(this).addClass("container mb-3");
-            $(this).html(video_before + video_src + video_after)
+            $(this).html(embed_before + embed_size + embed_before2 + embed_src + embed_after)
         })
     }
 })
