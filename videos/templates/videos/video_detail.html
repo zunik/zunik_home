@@ -2,6 +2,19 @@
 
 {% block main_class %}with-side-panel{% endblock %}
 
+{% block breadcrumb %}
+    <li class="breadcrumb-item">
+        <a href="{% url 'video:my_list' %}">Video</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="{% url 'video:my_list' %}">My Video</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span>My Video View</span>
+    </li>
+
+{% endblock %}
+
 {% block content %}
     <div class="content-box">
         <div class="element-wrapper">
@@ -31,14 +44,14 @@
                             <strong>Tags : </strong>
                             {% for tag in tags %}
                                 <span class="badge badge-pill badge-info p-2">
-                                <a href="{% url 'video:list_tag' tag %}">{{ tag.name }}</a>
+                                <a href="{% url 'video:my_list_tag' tag %}">{{ tag.name }}</a>
                             </span>
                             {% endfor %}
                         {% endif %}
                     </div>
                 </div>
                 <div class="text-right">
-                    <a href="{% url 'video:list' %}" class="btn btn-secondary btn-sm">목록으로</a>
+                    <a href="{% url 'video:my_list' %}" class="btn btn-secondary btn-sm">목록으로</a>
                 </div>
 
                 <div>
@@ -63,14 +76,14 @@
                 {% for next_video in next_video_list %}
                 <div class="profile-tile">
                     <div class="profile-tile-box p-0">
-                        <a href="{% url 'video:detail_view' next_video.id %}">
+                        <a href="{% url 'video:my_detail' next_video.id %}">
                             <img alt="{{ next_video.title }}" class="img-thumbnail  img-fluid" src="{{ next_video.get_video_thumbnail }}">
                         </a>
                     </div>
                     <div class="profile-tile-meta">
                         <ul>
                             <li>
-                                <strong><a href="{% url 'video:detail_view' next_video.id %}">{{ next_video.title }}</a></strong>
+                                <strong><a href="{% url 'video:my_detail' next_video.id %}">{{ next_video.title }}</a></strong>
                             </li>
                             <li>
                                 {{ next_video.video_at|date:"Y-m-d" }}

@@ -3,7 +3,7 @@ $(function(){
 
     if ($embed_markdown.length > 0) {
         var embed_before = "<div class='row justify-content-md-center'><div class='embed-responsive embed-responsive-";
-        var embed_before2 = " col-md-6'><iframe class='embed-responsive-item' src='";
+        var embed_before2 = " col-md-8'><iframe class='embed-responsive-item' src='";
         var embed_after = "' allowfullscreen></iframe></div></div>";
 
         // size 21by9, 16by9, 4by3, 1by1

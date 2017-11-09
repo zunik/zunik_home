@@ -3,8 +3,8 @@ from . import views
 
 app_name = 'diary'
 urlpatterns =[
-    url(r'^$', views.my_diary_redirect, name='list'),
-    url(r'^year/(?P<year>\d{4})/$', views.DiaryYearView.as_view(), name='list_year'),
-    url(r'^(?P<pk>[0-9]+)/$', views.DiaryDetailView.as_view(), name='detail_view'),
-    url(r'^tag/(?P<tag>[^/]+(?u))/$', views.DiaryTagView.as_view(), name='list_tag'),
+    url(r'^open/$', views.open_diary_redirect, name='open_list'),
+    url(r'^open/year/(?P<year>\d{4})/$', views.OpenDiaryYearView.as_view(), name='open_list_year'),
+    url(r'^open/tag/(?P<tag>[^/]+(?u))/$', views.OpenDiaryTagView.as_view(), name='open_list_tag'),
+    url(r'^open/(?P<pk>[0-9]+)/$', views.OpenDiaryDetailView.as_view(), name='open_detail'),
 ]

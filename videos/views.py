@@ -75,5 +75,5 @@ def my_video_redirect(request):
     last_video = Video.objects.latest('video_at')
     year = last_video.video_at.year
 
-    return HttpResponseRedirect(reverse('video:list_year', args=(year,)))
+    return HttpResponseRedirect(reverse('video:my_list_year', args=(year,)))
 

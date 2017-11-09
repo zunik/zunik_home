@@ -5,7 +5,7 @@ from tagging.views import TaggedObjectList
 from .models import Diary
 
 
-class DiaryYearView(YearArchiveView):
+class OpenDiaryYearView(YearArchiveView):
     queryset = Diary.objects.filter(hide=False)
     date_field = 'diary_at'
     make_object_list = True
@@ -13,7 +13,7 @@ class DiaryYearView(YearArchiveView):
     template_name = 'diary/diary_list.html'
 
     def get_context_data(self, **kwargs):
-        context = super(DiaryYearView, self).get_context_data(**kwargs)
+        context = super(OpenDiaryYearView, self).get_context_data(**kwargs)
         context['now_year'] = int(self.get_year())
         context['year_list'] = list(Diary.objects.filter(hide=False).dates('diary_at', 'year', order='DESC'))
 
@@ -29,13 +29,13 @@ class DiaryYearView(YearArchiveView):
         return context
 
 
-class DiaryTagView(TaggedObjectList):
+class OpenDiaryTagView(TaggedObjectList):
     model = Diary
     paginate_by = 10
     template_name = 'diary/diary_list.html'
 
     def get_context_data(self, **kwargs):
-        context = super(DiaryTagView, self).get_context_data(**kwargs)
+        context = super(OpenDiaryTagView, self).get_context_data(**kwargs)
         context['year_list'] = list(Diary.objects.filter(hide=False).dates('diary_at', 'year', order='DESC'))
 
         i = 0
@@ -52,12 +52,12 @@ class DiaryTagView(TaggedObjectList):
         return context
 
 
-class DiaryDetailView(DetailView):
+class OpenDiaryDetailView(DetailView):
     queryset = Diary.objects.filter(hide=False)
 
 
-def my_diary_redirect(request):
+def open_diary_redirect(request):
     last_diary = Diary.objects.filter(hide=False).latest('diary_at')
     year = last_diary.diary_at.year
 
-    return HttpResponseRedirect(reverse('diary:list_year', args=(year,)))
+    return HttpResponseRedirect(reverse('diary:open_list_year', args=(year,)))

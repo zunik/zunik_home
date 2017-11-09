@@ -65,10 +65,11 @@
                             <div class="icon-w">
                                 <div class="os-icon os-icon-others-29"></div>
                             </div>
-                            <span>Video</span></a>
+                            <span>Video</span>
+                        </a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="{% url 'video:list' %}">My Video</a>
+                                <a href="{% url 'video:my_list' %}">My Video</a>
                             </li>
                         </ul>
                     </li>
@@ -135,7 +136,7 @@
                 </div>
                 <ul class="main-menu">
                     <li class="has-sub-menu">
-                        <a href="{% url 'diary:list' %}">
+                        <a href="{% url 'diary:open_list' %}">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-ui-55"></div>
                             </div>
@@ -143,12 +144,12 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="{% url 'diary:list' %}">Diary</a>
+                                <a href="{% url 'diary:open_list' %}">Open Diary</a>
                             </li>
                         </ul>
                     </li>
                     <li class="has-sub-menu">
-                        <a href="{% url 'video:list' %}">
+                        <a href="{% url 'video:my_list' %}">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-others-29"></div>
                             </div>
@@ -156,7 +157,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="{% url 'video:list' %}">My Video</a>
+                                <a href="{% url 'video:my_list' %}">My Video</a>
                             </li>
                             <li>
                                 <a href="#">Favorite Videos</a>
@@ -186,14 +187,9 @@
             -------------------->
             <ul class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="index.html">Home</a>
+                    <a href="/">Home</a>
                 </li>
-                <li class="breadcrumb-item">
-                    <a href="index.html">Products</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <span>Laptop with retina screen</span>
-                </li>
+                {% block breadcrumb %}{% endblock %}
             </ul>
             <!--------------------
             END - Breadcrumbs

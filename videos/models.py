@@ -21,7 +21,7 @@ class Video(models.Model):
 
     @property
     def get_absolute_url(self):
-        return reverse('video:detail_view', args=[str(self.id)])
+        return reverse('video:my_detail', args=[str(self.id)])
 
     def get_video_url(self):
         return "//www.youtube.com/embed/" + self.video_id + "?rel=0"

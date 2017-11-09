@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
 
-{% block main_class %}with-side-panel{% endblock %}
+{% block breadcrumb %}
+    <li class="breadcrumb-item">
+        <a href="{% url 'diary:open_list' %}">Diary</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="{% url 'diary:open_list' %}">Open Diary</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span>Open Diary View</span>
+    </li>
+{% endblock %}
 
 {% block content %}
     <div class="content-box">
         <div class="element-wrapper">
             <h6 class="element-header">
-                Diary View
+                Open Diary View
             </h6>
             <div class="element-box">
                 <h5 class="form-header">
@@ -28,14 +38,14 @@
                             <strong>Tags : </strong>
                             {% for tag in tags %}
                                 <span class="badge badge-pill badge-info p-2">
-                                <a href="{% url 'diary:list_tag' tag %}">{{ tag.name }}</a>
+                                <a href="{% url 'diary:open_list_tag' tag %}">{{ tag.name }}</a>
                             </span>
                             {% endfor %}
                         {% endif %}
                     </div>
                 </div>
                 <div class="text-right mt-3 mb-3">
-                    <a href="{% url 'diary:list' %}" class="btn btn-secondary btn-sm">목록으로</a>
+                    <a href="{% url 'diary:open_list' %}" class="btn btn-secondary btn-sm">목록으로</a>
                 </div>
 
                 <div>
@@ -46,38 +56,4 @@
             </div>
         </div>
     </div>
-
-    {% if next_video_list %}
-    <div class="content-panel">
-        <div class="content-panel-close">
-            <i class="os-icon os-icon-close"></i>
-        </div>
-        <div class="element-wrapper">
-            <h6 class="element-header">
-                다음 동영상
-            </h6>
-            <div class="element-box-tp next_video_wrap">
-                {% for next_video in next_video_list %}
-                <div class="profile-tile">
-                    <div class="profile-tile-box p-0">
-                        <a href="{% url 'video:detail_view' next_video.id %}">
-                            <img alt="{{ next_video.title }}" class="img-thumbnail  img-fluid" src="{{ next_video.get_video_thumbnail }}">
-                        </a>
-                    </div>
-                    <div class="profile-tile-meta">
-                        <ul>
-                            <li>
-                                <strong><a href="{% url 'video:detail_view' next_video.id %}">{{ next_video.title }}</a></strong>
-                            </li>
-                            <li>
-                                {{ next_video.video_at|date:"Y-m-d" }}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    {% endif %}
 {%  endblock %}
