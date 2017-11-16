@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}{{ object.title }}{% endblock %}
+
 {% block main_class %}with-side-panel{% endblock %}
 
 {% block breadcrumb %}
@@ -22,9 +24,9 @@
                 My Video View
             </h6>
             <div class="element-box">
-                <h5 class="form-header">
+                <h4 class="form-header">
                     {{ object.title }}
-                </h5>
+                </h4>
                 <div class="form-desc">
                     <i class="fa fa-calendar"></i> {{ object.video_at|date:"Y-m-d" }}
                 </div>

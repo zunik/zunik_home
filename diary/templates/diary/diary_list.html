@@ -37,7 +37,7 @@
                                         {% for year in year_list %}
                                             <li>
                                                 {% if now_year == year.year %}
-                                                    <a href="#" class="active">
+                                                    <a href="{% url 'diary:open_list_year' year.year %}" class="active">
                                                         <i class="os-icon os-icon-checkmark"></i>
                                                         {{ year.year }} 년
                                                         <span class="badge badge-pill badge-info">+{{ year.count }}</span>
@@ -71,7 +71,7 @@
                                         {% for tag in tags %}
                                             <li>
                                                 {% if now_tag and tag == now_tag %}
-                                                    <a href="#" class="active">
+                                                    <a href="{% url 'diary:open_list_tag' tag %}" class="active">
                                                         <i class="os-icon os-icon-checkmark"></i>
                                                         {{ tag }}
                                                         <span class="badge badge-pill badge-info">+{{ tag.count }}</span>
@@ -120,7 +120,7 @@
                             <div class="tasks-list-w">
                                 <div class="markdown-body">
                                     {% load markdown_deux_tags %}
-                                    {{ object.content|markdown|truncatechars_html:150 }}
+                                    {{ object.content|markdown|truncatechars_html:130 }}
                                 </div>
                             </div>
                         </div>

@@ -84,7 +84,7 @@
         -------------------->
         <div class="desktop-menu menu-side-w menu-activated-on-click color-scheme-dark">
             <div class="logo-w">
-                <a class="logo" href="index.html"><img src="{% static 'img/logo.png' %}"></a>
+                <a class="logo" href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}"></a>
             </div>
             <div class="menu-and-user">
                 <div class="logged-user-w">
@@ -135,7 +135,7 @@
                     </div>
                 </div>
                 <ul class="main-menu">
-                    <li class="has-sub-menu">
+                    <li class="has-sub-menu {% if '/diary/' in request.path %}active{% endif %}">
                         <a href="{% url 'diary:open_list' %}">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-ui-55"></div>
@@ -148,7 +148,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="has-sub-menu">
+                    <li class="has-sub-menu  {% if '/video/' in request.path %}active{% endif %}">
                         <a href="{% url 'video:my_list' %}">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-others-29"></div>
@@ -165,7 +165,7 @@
                         </ul>
                     </li>
 
-                     <li class="has-sub-menu">
+                     <li class="has-sub-menu  {% if '/photo/' in request.path %}active{% endif %}">
                         <a href="{% url 'photo:list' %}">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-documents-07"></div>
