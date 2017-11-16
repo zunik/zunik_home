@@ -23,41 +23,6 @@
                         </h4>
                         <div class="todo-sidebar-section-contents">
                             <div class="todo-sidebar-section-sub-section">
-                                <div class="todo-sidebar-section-sub-section-toggler">
-                                    <i class="os-icon os-icon-ui-23"></i>
-                                </div>
-                                <div class="todo-sidebar-section-sub-header">
-                                    <i class="os-icon os-icon-basic-2-259-calendar"></i>
-                                    <h6>
-                                        YEARS
-                                    </h6>
-                                </div>
-                                <div class="todo-sidebar-section-sub-section-content">
-                                    <ul class="items-list filter-list">
-                                        {% for year in year_list %}
-                                            <li>
-                                                {% if now_year == year.year %}
-                                                    <a href="{% url 'diary:open_list_year' year.year %}" class="active">
-                                                        <i class="os-icon os-icon-checkmark"></i>
-                                                        {{ year.year }} 년
-                                                        <span class="badge badge-pill badge-info">+{{ year.count }}</span>
-                                                    </a>
-                                                {% else %}
-                                                    <a href="{% url 'diary:open_list_year' year.year %}">
-                                                        {{ year.year }} 년
-                                                        <span class="badge badge-pill badge-info">+{{ year.count }}</span>
-                                                    </a>
-                                                {% endif %}
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="todo-sidebar-section-sub-section">
-                                <div class="todo-sidebar-section-sub-section-toggler">
-                                    <i class="os-icon os-icon-ui-23"></i>
-                                </div>
                                 <div class="todo-sidebar-section-sub-header">
                                     <i class="os-icon os-icon-ui-54"></i>
                                     <h6>
@@ -68,20 +33,28 @@
                                     {% load tagging_tags %}
                                     {% tags_for_model diary.Diary as tags with counts %}
                                     <ul class="items-list filter-list">
+                                        <li>
+                                            {% if not now_tag %}
+                                                <a href="{% url 'diary:open_list' %}" class="active">
+                                                <i class="os-icon os-icon-checkmark"></i>
+                                            {% else %}
+                                                <a href="{% url 'diary:open_list' %}">
+                                            {% endif %}
+                                            전체 보기
+                                            <span class="badge badge-pill badge-info">ALL</span>
+                                            </a>
+                                        </li>
                                         {% for tag in tags %}
                                             <li>
                                                 {% if now_tag and tag == now_tag %}
                                                     <a href="{% url 'diary:open_list_tag' tag %}" class="active">
-                                                        <i class="os-icon os-icon-checkmark"></i>
-                                                        {{ tag }}
-                                                        <span class="badge badge-pill badge-info">+{{ tag.count }}</span>
-                                                    </a>
+                                                    <i class="os-icon os-icon-checkmark"></i>
                                                 {% else %}
                                                     <a href="{% url 'diary:open_list_tag' tag %}">
-                                                        {{ tag }}
-                                                        <span class="badge badge-pill badge-info">+{{ tag.count }}</span>
-                                                    </a>
                                                 {% endif %}
+                                                {{ tag }}
+                                                <span class="badge badge-pill badge-info">+{{ tag.count }}</span>
+                                                </a>
                                             </li>
                                         {% endfor %}
                                     </ul>
@@ -94,41 +67,41 @@
 
                 <div class="todo-content">
                     <h4 class="todo-content-header">
-                        {% if list_type == 'year' %}
-                            <i class="os-icon os-icon-basic-2-259-calendar"></i><span>{{ now_year }}</span>
+                        {% if list_type == 'all' %}
+                            <span>전체 보기</span>
                         {% elif list_type == 'tag' %}
                             <i class="os-icon os-icon-ui-54"></i><span>{{ now_tag }}</span>
                         {% endif %}
                     </h4>
                     <div class="all-tasks-w">
                         {% for object in object_list %}
-                        <div class="tasks-section">
-                            <div class="tasks-header-w">
-                                <a class="tasks-header-toggler" href="#"><i class="os-icon os-icon-ui-23"></i></a>
-                                <h5 class="tasks-header">
-                                    <strong>
-                                        <a href="{{ object.get_absolute_url }}">
-                                            {{ object.title }}
-                                        </a>
-                                        {% if 'embed-md' in object.content %}
-                                            <i class="fa fa-play-circle-o" title="영상 포함" alt="영상 포함"></i>
-                                        {% endif %}
-                                    </strong>
-                                </h5>
-                                <span class="tasks-sub-header"><i class="fa fa-calendar"></i> {{ object.diary_at|date:"Y-m-d" }}</span>
-                            </div>
-                            <div class="tasks-list-w">
-                                <div class="markdown-body">
-                                    {% load markdown_deux_tags %}
-                                    {{ object.content|markdown|truncatechars_html:130 }}
+                            <div class="tasks-section">
+                                <div class="tasks-header-w">
+                                    <a class="tasks-header-toggler" href="#"><i class="os-icon os-icon-ui-23"></i></a>
+                                    <h5 class="tasks-header">
+                                        <strong>
+                                            <a href="{{ object.get_absolute_url }}">
+                                                {{ object.title }}
+                                            </a>
+                                            {% if 'embed-md' in object.content %}
+                                                <i class="fa fa-play-circle-o" title="영상 포함" alt="영상 포함"></i>
+                                            {% endif %}
+                                        </strong>
+                                    </h5>
+                                    <span class="tasks-sub-header"><i class="fa fa-calendar"></i> {{ object.diary_at|date:"Y-m-d" }}</span>
+                                </div>
+                                <div class="tasks-list-w">
+                                    <div class="markdown-body">
+                                        {% load markdown_deux_tags %}
+                                        {{ object.content|markdown|truncatechars_html:130 }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         {% endfor %}
                     </div>
 
                     {% if is_paginated %}
-                        <nav>
+                        <nav class="mt-5">
                             <ul class="pagination justify-content-center">
                                 {% if page_obj.has_previous%}
                                     <li class="page-item">
