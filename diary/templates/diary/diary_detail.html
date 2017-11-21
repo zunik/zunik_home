@@ -37,12 +37,37 @@
                         {% tags_for_object object as tags %}
 
                         {% if tags %}
-                            <strong>Tags : </strong>
+                            <strong>태그 : </strong>
                             {% for tag in tags %}
-                                <span class="badge badge-pill badge-info p-2">
-                                    <a href="{% url 'diary:open_list_tag' tag %}">{{ tag.name }}</a>
-                                </span>
+                                <a href="{% url 'diary:open_list_tag' tag %}">#{{ tag.name }}</a>
                             {% endfor %}
+                            <br />
+                        {% endif %}
+                        {% if mentioned_list %}
+                            <strong>이 글을 언급한 글 : </strong>
+                            {% for row in mentioned_list %}
+                                <a href="{{ row.get_absolute_url }}">[{{ row }}]</a>
+                                {% if not forloop.last %},&nbsp;{% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        {% if related_list %}
+                            <strong>유사한 글 : </strong>
+                            {% for row in related_list %}
+                                <a href="{{ row.get_absolute_url }}">[{{ row }}]</a>
+                                {% if not forloop.last %},&nbsp;{% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-3">
+                        {% if prev_object %}
+                        <a href="{{ prev_object.get_absolute_url }}" class="btn btn-primary"><i class="fa fa-chevron-left"></i> 이전 글</a>
+                        {% endif %}
+                    </div>
+                    <div class="text-right col-3">
+                        {% if next_object %}
+                        <a href="{{ next_object.get_absolute_url }}" class="btn btn-primary">다음 글 <i class="fa fa-chevron-right"></i></a>
                         {% endif %}
                     </div>
                 </div>

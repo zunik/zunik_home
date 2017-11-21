@@ -1,6 +1,8 @@
 from django.views.generic import DetailView, ListView
 from tagging.views import TaggedObjectList
+from tagging.models import TaggedItem
 from .models import Diary
+from zunik_home.help import custom_paginator
 
 
 class OpenDiaryListView(ListView):
@@ -11,40 +13,7 @@ class OpenDiaryListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(OpenDiaryListView, self).get_context_data(**kwargs)
 
-        paginator = context['paginator']
-        page_obj = context['page_obj']
-        page_numbers_range = 7;
-        max_page = len(paginator.page_range)
-        current_page = page_obj.number
-
-        current_page_pack = int((current_page - 1) / page_numbers_range)
-        end_page_pack = int((max_page - 1) / page_numbers_range)
-
-        start_page = current_page_pack * page_numbers_range
-        end_page = start_page + page_numbers_range
-
-        if end_page >= max_page:
-            end_page = max_page
-
-        if current_page_pack == end_page_pack:
-            has_next_pack = False
-        else:
-            has_next_pack = True
-
-        if current_page_pack == 0:
-            has_previous_pack = False
-        else:
-            has_previous_pack = True
-
-        custom_page_obj = {
-            'page_range': paginator.page_range[start_page:end_page],
-            'start_page' : start_page,
-            'end_page' : end_page,
-            'has_next_pack' : has_next_pack,
-            'has_previous_pack' : has_previous_pack,
-        }
-
-        context['custom_page_obj'] = custom_page_obj
+        context['custom_page_obj'] = custom_paginator(context['paginator'], context['page_obj'], 5)
 
         context['list_type'] = 'all'
         return context
@@ -58,6 +27,7 @@ class OpenDiaryTagView(TaggedObjectList):
     def get_context_data(self, **kwargs):
         context = super(OpenDiaryTagView, self).get_context_data(**kwargs)
 
+        context['custom_page_obj'] = custom_paginator(context['paginator'], context['page_obj'], 5)
         context['now_tag'] = context['tag']
         context['list_type'] = 'tag'
         del(context['tag'])
@@ -66,3 +36,19 @@ class OpenDiaryTagView(TaggedObjectList):
 
 class OpenDiaryDetailView(DetailView):
     queryset = Diary.objects.filter(hide=False)
+
+    def get_context_data(self, **kwargs):
+        context = super(OpenDiaryDetailView, self).get_context_data(**kwargs)
+        object_path = '/diary/open/' + str(context['object'].id) + '/';
+        context['mentioned_list'] = Diary.objects.filter(content__icontains=object_path)
+
+        relation_num = 5
+        context['related_list'] = TaggedItem.objects.get_related(context['object'], Diary, relation_num)
+
+        context['next_object'] = Diary.objects.filter(diary_at__gte=context['object'].diary_at)\
+            .exclude(diary_at=context['object'].diary_at, id__lte=context['object'].id).order_by('-diary_at','-id').last()
+
+        context['prev_object'] = Diary.objects.filter(diary_at__lte=context['object'].diary_at)\
+            .exclude(diary_at=context['object'].diary_at, id__gte=context['object'].id).order_by('-diary_at', '-id').first()
+
+        return context

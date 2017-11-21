@@ -16,3 +16,5 @@ ul.filter-list li > a.active{color:#0d509a !important; font-weight: bold;}
 
 .badge > a {color:#fff !important;}
 .badge > a:hover{text-decoration: none}
+
+strong{font-weight:700}

@@ -13,7 +13,7 @@ class Diary(models.Model):
     tag = TagField()
 
     class Meta:
-        ordering = ['-diary_at']
+        ordering = ['-diary_at', '-id']
 
     def __str__(self):
         return self.title

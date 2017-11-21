@@ -14,7 +14,7 @@ class Video(models.Model):
     tag = TagField()
 
     class Meta:
-        ordering = ['-video_at']
+        ordering = ['-video_at', '-id']
 
     def __str__(self):
         return self.title
