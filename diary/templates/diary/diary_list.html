@@ -70,7 +70,7 @@
                         {% if list_type == 'all' %}
                             <span>전체 보기</span>
                         {% elif list_type == 'tag' %}
-                            <i class="os-icon os-icon-ui-54"></i><span>{{ now_tag }}</span>
+                            <i class="os-icon os-icon-ui-54" title="tag"></i><span>{{ now_tag }}</span>
                         {% endif %}
                     </h4>
                     <div class="all-tasks-w">
@@ -80,7 +80,7 @@
                                     <a class="tasks-header-toggler" href="#"><i class="os-icon os-icon-ui-23"></i></a>
                                     <h5 class="tasks-header">
                                         <strong>
-                                            <a href="{{ object.get_absolute_url }}">
+                                            <a href="{{ object.get_absolute_url }}?page={{ page_obj.number }}{% if list_type == 'tag' %}&tag={{ now_tag }}{% endif %}">
                                                 {{ object.title }}
                                             </a>
                                             {% if 'embed-md' in object.content %}
