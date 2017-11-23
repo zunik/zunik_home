@@ -6,7 +6,7 @@ from zunik_home.help import custom_paginator
 
 
 class OpenDiaryListView(ListView):
-    model = Diary
+    queryset = Diary.objects.filter(hide=False)
     paginate_by = 10
     template_name = 'diary/diary_list.html'
 
@@ -20,7 +20,7 @@ class OpenDiaryListView(ListView):
 
 
 class OpenDiaryTagView(TaggedObjectList):
-    model = Diary
+    queryset = Diary.objects.filter(hide=False)
     paginate_by = 10
     template_name = 'diary/diary_list.html'
 
@@ -61,10 +61,10 @@ class OpenDiaryDetailView(DetailView):
         else:
             objects = Diary.objects
 
-        context['next_object'] = objects.filter(diary_at__gte=context['object'].diary_at)\
+        context['next_object'] = objects.filter(hide=False).filter(diary_at__gte=context['object'].diary_at)\
             .exclude(diary_at=context['object'].diary_at, id__lte=context['object'].id).order_by('-diary_at','-id').last()
 
-        context['prev_object'] = objects.filter(diary_at__lte=context['object'].diary_at)\
+        context['prev_object'] = objects.filter(hide=False).filter(diary_at__lte=context['object'].diary_at)\
             .exclude(diary_at=context['object'].diary_at, id__gte=context['object'].id).order_by('-diary_at', '-id').first()
 
         return context
