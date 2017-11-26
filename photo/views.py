@@ -40,16 +40,15 @@ class MyPhotoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(MyPhotoDetailView, self).get_context_data(**kwargs)
 
-        # 총 next_photo 에 뽑아서 보여줄 개수
-        next_num = 8
-        context['next_list'] = TaggedItem.objects.get_related(context['object'], Photo, next_num)
+        relation_num = 8
+        context['related_list'] = TaggedItem.objects.get_related(context['object'], Photo, relation_num)
 
-        next_plus_count = next_num - len(context['next_list'])
+        relation_plus_count = relation_num - len(context['related_list'])
 
         # tags 관련 컨텐츠 뽑아도 개수에 충족하지 못 한다면 최근거에서 부족한 만큼 가져오기
-        if next_plus_count != 0:
-            context['next_list'].extend(Photo.objects.exclude(pk=context['object'].id)
-                                              .all()[:next_plus_count])
+        if relation_plus_count != 0:
+            context['related_list'].extend(Photo.objects.exclude(pk=context['object'].id)
+                                              .all()[:relation_plus_count])
 
         # 목록으로 돌아갈시 page
         now_page = self.request.GET.get('page')

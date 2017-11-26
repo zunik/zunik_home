@@ -40,16 +40,14 @@ class MyVideoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(MyVideoDetailView, self).get_context_data(**kwargs)
 
-        # 총 next_video 에 뽑아서 보여줄 개수
-        next_video_num = 8
-        context['next_video_list'] = TaggedItem.objects.get_related(context['object'], Video, next_video_num)
+        relation_num = 8
+        context['related_list'] = TaggedItem.objects.get_related(context['object'], Video, relation_num)
 
-        next_video_plus_count = next_video_num - len(context['next_video_list'])
+        relation_plus_count = relation_num - len(context['related_list'])
 
         # tags 관련 영상을 뽑아도 개수에 충족하지 못 한다면 최근거에서 부족한 만큼 가져오기
-        if next_video_plus_count != 0:
-            context['next_video_list'].extend(Video.objects.exclude(pk=context['object'].id)
-                                              .all()[:next_video_plus_count])
+        if relation_plus_count != 0:
+            context['related_list'].extend(Video.objects.exclude(pk=context['object'].id).all()[:relation_plus_count])
 
         # 목록으로 돌아갈시 page
         now_page = self.request.GET.get('page')

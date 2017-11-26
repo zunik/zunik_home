@@ -32,3 +32,6 @@ class Photo(models.Model):
     @property
     def get_absolute_url(self):
         return reverse('photo:my_detail', args=[str(self.id)])
+
+    def get_id_string_format(self):
+        return str(self.id)
