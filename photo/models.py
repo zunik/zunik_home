@@ -1,6 +1,8 @@
 from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import Thumbnail
+from tagging.fields import TagField
+from django.urls import reverse
 
 
 class Photo(models.Model):
@@ -19,7 +21,14 @@ class Photo(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     hide = models.BooleanField(default=False)
+    tag = TagField()
+
+    class Meta:
+        ordering = ['-photo_at', '-id']
 
     def __str__(self):
         return self.title
 
+    @property
+    def get_absolute_url(self):
+        return reverse('photo:my_detail', args=[str(self.id)])

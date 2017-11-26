@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 
 {% block title %}{{ object.title }}{% endblock %}
+{% block keywords %}{{ object.tag }}{% endblock %}
+{% block meta_desc  %}{{ object.content|striptags|truncatechars:80 }}{% endblock %}
+
+{% block og_title %}{{ object.title }}{% endblock %}
+{% block og_desc  %}{{ object.content|striptags|truncatechars:50 }}{% endblock %}
+{% block og_url %}{{ block.super }}{{ object.get_absolute_url }}{% endblock %}
+
+{% block twitter_title %}{{ object.title }}{% endblock %}
+{% block twitter_desc  %}{{ object.content|striptags|truncatechars:50 }}{% endblock %}
+{% block twitter_url %}{{ block.super }}{{ object.get_absolute_url }}{% endblock %}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item">

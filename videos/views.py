@@ -1,32 +1,21 @@
-from django.shortcuts import HttpResponseRedirect, reverse
-from django.views.generic.dates import YearArchiveView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from tagging.views import TaggedObjectList
-from tagging.models import TaggedItem
+from tagging.models import TaggedItem, Tag
 from .models import Video
+from zunik_home.help import custom_paginator
 
 
-class MyVideoYearView(YearArchiveView):
-    model = Video
-    date_field = 'video_at'
-    make_object_list = True
+class MyVideoListView(ListView):
+    queryset = Video.objects.filter(hide=False)
     paginate_by = 15
     template_name = 'videos/video_list.html'
 
     def get_context_data(self, **kwargs):
-        context = super(MyVideoYearView, self).get_context_data(**kwargs)
-        context['now_year'] = int(self.get_year())
-        context['year_list'] = list(Video.objects.dates('video_at', 'year', order='DESC'))
+        context = super(MyVideoListView, self).get_context_data(**kwargs)
 
-        i = 0
-        for date in context['year_list']:
-            year = context['year_list'][i].year
-            context['year_list'][i] = {}
-            context['year_list'][i]['year'] = year
-            context['year_list'][i]['count'] = Video.objects.filter(video_at__year = date.year).count()
-            i = i + 1
+        context['custom_page_obj'] = custom_paginator(context['paginator'], context['page_obj'], 5)
 
-        context['list_type'] = 'year'
+        context['list_type'] = 'all'
         return context
 
 
@@ -37,16 +26,8 @@ class MyVideoTagView(TaggedObjectList):
 
     def get_context_data(self, **kwargs):
         context = super(MyVideoTagView, self).get_context_data(**kwargs)
-        context['year_list'] = list(Video.objects.dates('video_at', 'year', order='DESC'))
 
-        i = 0
-        for date in context['year_list']:
-            year = context['year_list'][i].year
-            context['year_list'][i] = {}
-            context['year_list'][i]['year'] = year
-            context['year_list'][i]['count'] = Video.objects.filter(video_at__year=date.year).count()
-            i = i + 1
-
+        context['custom_page_obj'] = custom_paginator(context['paginator'], context['page_obj'], 5)
         context['now_tag'] = context['tag']
         context['list_type'] = 'tag'
         del(context['tag'])
@@ -54,26 +35,45 @@ class MyVideoTagView(TaggedObjectList):
 
 
 class MyVideoDetailView(DetailView):
-    model = Video
+    queryset = Video.objects.filter(hide=False)
 
     def get_context_data(self, **kwargs):
+        context = super(MyVideoDetailView, self).get_context_data(**kwargs)
+
         # 총 next_video 에 뽑아서 보여줄 개수
         next_video_num = 8
-        context = super(MyVideoDetailView, self).get_context_data(**kwargs)
-        context['next_video_list'] = TaggedItem.objects.get_related(context['object'], self.model, next_video_num)
+        context['next_video_list'] = TaggedItem.objects.get_related(context['object'], Video, next_video_num)
 
         next_video_plus_count = next_video_num - len(context['next_video_list'])
 
         # tags 관련 영상을 뽑아도 개수에 충족하지 못 한다면 최근거에서 부족한 만큼 가져오기
         if next_video_plus_count != 0:
-            context['next_video_list'].extend(self.model.objects.exclude(pk=context['object'].id)
+            context['next_video_list'].extend(Video.objects.exclude(pk=context['object'].id)
                                               .all()[:next_video_plus_count])
+
+        # 목록으로 돌아갈시 page
+        now_page = self.request.GET.get('page')
+        if not now_page:
+            now_page = 1
+        context['now_page'] = now_page
+
+        # 다음 글 , 이전 글
+        now_tag = self.request.GET.get('tag')
+
+        if now_tag:
+            tag_object = Tag.objects.get(name=now_tag)
+            objects = TaggedItem.objects.get_by_model(Video, tag_object)
+            context['now_tag'] = now_tag
+        else:
+            objects = Video.objects
+
+        context['next_object'] = objects.filter(hide=False).filter(video_at__gte=context['object'].video_at)\
+            .exclude(video_at=context['object'].video_at, id__lte=context['object'].id).order_by('-video_at', '-id')\
+            .last()
+
+        context['prev_object'] = objects.filter(hide=False).filter(video_at__lte=context['object'].video_at) \
+            .exclude(video_at=context['object'].video_at, id__gte=context['object'].id).order_by('-video_at', '-id')\
+            .first()
+
         return context
-
-
-def my_video_redirect(request):
-    last_video = Video.objects.latest('video_at')
-    year = last_video.video_at.year
-
-    return HttpResponseRedirect(reverse('video:my_list_year', args=(year,)))
 

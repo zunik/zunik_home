@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 
 {% block title %}{{ object.title }}{% endblock %}
+{% block keywords %}{{ object.tag }}{% endblock %}
+{% block meta_desc  %}{{ object.memo|striptags|truncatechars:80 }}{% endblock %}
+
+{% block og_title %}{{ object.title }}{% endblock %}
+{% block og_desc  %}{{ object.memo|striptags|truncatechars:50 }}{% endblock %}
+{% block og_url %}{{ block.super }}{{ object.get_absolute_url }}{% endblock %}
+{% block og_image %}https:{{ object.get_video_thumbnail }}{% endblock %}
+
+{% block twitter_title %}{{ object.title }}{% endblock %}
+{% block twitter_desc  %}{{ object.memo|striptags|truncatechars:50 }}{% endblock %}
+{% block twitter_url %}{{ block.super }}{{ object.get_absolute_url }}{% endblock %}
+{% block twitter_image %}https:{{ object.get_video_thumbnail }}{% endblock %}
 
 {% block main_class %}with-side-panel{% endblock %}
 
@@ -14,7 +26,6 @@
     <li class="breadcrumb-item">
         <span>My Video View</span>
     </li>
-
 {% endblock %}
 
 {% block content %}
@@ -43,17 +54,31 @@
                         {% tags_for_object object as tags %}
 
                         {% if tags %}
-                            <strong>Tags : </strong>
+                            <strong style="font-size:1.2em"><i class="os-icon os-icon-ui-54" title="tag"></i></strong>
                             {% for tag in tags %}
-                                <span class="badge badge-pill badge-info p-2">
-                                <a href="{% url 'video:my_list_tag' tag %}">{{ tag.name }}</a>
-                            </span>
+                                <a href="{% url 'video:my_list_tag' tag %}">#{{ tag.name }}</a>
                             {% endfor %}
                         {% endif %}
                     </div>
                 </div>
-                <div class="text-right">
-                    <a href="{% url 'video:my_list' %}" class="btn btn-secondary btn-sm">목록으로</a>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 mb-1">
+                        {% if prev_object %}
+                            <a href="{{ prev_object.get_absolute_url }}?page={{ now_page }}{% if now_tag %}&tag={{ now_tag }}{% endif %}" class="btn btn-primary">
+                                <i class="fa fa-chevron-left"></i> 이전 [{{ prev_object.title|truncatechars:20 }}]
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="text-right col-sm-12 col-md-6 mb-1">
+                        {% if next_object %}
+                            <a href="{{ next_object.get_absolute_url }}?page={{ now_page }}{% if now_tag %}&tag={{ now_tag }}{% endif %}" class="btn btn-primary">
+                                [{{ next_object.title|truncatechars:20 }}] 다음 <i class="fa fa-chevron-right"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="text-right mt-3">
+                    <a href="{% url 'video:my_list' %}{% if now_tag %}tag/{{ now_tag }}/{% endif %}?page={{ now_page }}" class="btn btn-secondary btn-sm">목록으로</a>
                 </div>
 
                 <div>
@@ -66,36 +91,36 @@
     </div>
 
     {% if next_video_list %}
-    <div class="content-panel">
-        <div class="content-panel-close">
-            <i class="os-icon os-icon-close"></i>
-        </div>
-        <div class="element-wrapper">
-            <h6 class="element-header">
-                다음 동영상
-            </h6>
-            <div class="element-box-tp next_video_wrap">
-                {% for next_video in next_video_list %}
-                <div class="profile-tile">
-                    <div class="profile-tile-box p-0">
-                        <a href="{% url 'video:my_detail' next_video.id %}">
-                            <img alt="{{ next_video.title }}" class="img-thumbnail  img-fluid" src="{{ next_video.get_video_thumbnail }}">
-                        </a>
-                    </div>
-                    <div class="profile-tile-meta">
-                        <ul>
-                            <li>
-                                <strong><a href="{% url 'video:my_detail' next_video.id %}">{{ next_video.title }}</a></strong>
-                            </li>
-                            <li>
-                                {{ next_video.video_at|date:"Y-m-d" }}
-                            </li>
-                        </ul>
-                    </div>
+        <div class="content-panel">
+            <div class="content-panel-close">
+                <i class="os-icon os-icon-close"></i>
+            </div>
+            <div class="element-wrapper">
+                <h6 class="element-header">
+                    다음 동영상
+                </h6>
+                <div class="element-box-tp next_video_wrap">
+                    {% for next_video in next_video_list %}
+                        <div class="profile-tile">
+                            <div class="profile-tile-box p-0">
+                                <a href="{% url 'video:my_detail' next_video.id %}">
+                                    <img alt="{{ next_video.title }}" class="img-thumbnail  img-fluid" src="{{ next_video.get_video_thumbnail }}">
+                                </a>
+                            </div>
+                            <div class="profile-tile-meta">
+                                <ul>
+                                    <li>
+                                        <strong><a href="{% url 'video:my_detail' next_video.id %}">{{ next_video.title }}</a></strong>
+                                    </li>
+                                    <li>
+                                        {{ next_video.video_at|date:"Y-m-d" }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </div>
-    </div>
     {% endif %}
 {%  endblock %}

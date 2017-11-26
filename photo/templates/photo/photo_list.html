@@ -2,10 +2,10 @@
 
 {% block breadcrumb %}
     <li class="breadcrumb-item">
-        <a href="{% url 'video:my_list' %}">Video</a>
+        <a href="{% url 'photo:my_list' %}">Photo</a>
     </li>
     <li class="breadcrumb-item">
-        <span>My Video</span>
+        <span>My Photo</span>
     </li>
 {% endblock %}
 
@@ -13,7 +13,7 @@
     <div class="content-box">
         <div class="element-wrapper">
             <h6 class="element-header">
-                My Video
+                My Photo
             </h6>
             <div class="todo-app-w">
                 <div class="todo-sidebar">
@@ -31,14 +31,14 @@
                                 </div>
                                 <div class="todo-sidebar-section-sub-section-content">
                                     {% load tagging_tags %}
-                                    {% tags_for_model videos.Video as tags with counts %}
+                                    {% tags_for_model photo.Photo as tags with counts %}
                                     <ul class="items-list filter-list">
                                         <li>
                                             {% if not now_tag %}
-                                                <a href="{% url 'video:my_list' %}" class="active">
+                                                <a href="{% url 'photo:my_list' %}" class="active">
                                                 <i class="os-icon os-icon-checkmark"></i>
                                             {% else %}
-                                                <a href="{% url 'video:my_list' %}">
+                                                <a href="{% url 'photo:my_list' %}">
                                             {% endif %}
                                             전체 보기
                                             <span class="badge badge-pill badge-info">ALL</span>
@@ -47,13 +47,13 @@
                                         {% for tag in tags %}
                                             <li>
                                                 {% if now_tag and tag == now_tag %}
-                                                    <a href="{% url 'video:my_list_tag' tag %}" class="active">
+                                                    <a href="{% url 'photo:my_list_tag' tag %}" class="active">
                                                         <i class="os-icon os-icon-checkmark"></i>
                                                         {{ tag }}
                                                         <span class="badge badge-pill badge-info">+{{ tag.count }}</span>
                                                     </a>
                                                 {% else %}
-                                                    <a href="{% url 'video:my_list_tag' tag %}">
+                                                    <a href="{% url 'photo:my_list_tag' tag %}">
                                                         {{ tag }}
                                                         <span class="badge badge-pill badge-info">+{{ tag.count }}</span>
                                                     </a>
@@ -80,17 +80,18 @@
                         {% for object in object_list %}
                             <div class="col-md-4 col-sm-6 col-12 mb-2">
                                 <a href="{{ object.get_absolute_url }}?page={{ page_obj.number }}{% if list_type == 'tag' %}&tag={{ now_tag }}{% endif %}">
-                                    <img src="{{ object.get_video_thumbnail }}" class="img-thumbnail  img-fluid" data-placement="bottom" data-toggle="tooltip" title="{{ object.title }}">
+                                    <img src="{{ object.thumbnail.url }}" class="img-thumbnail img-fluid" data-placement="bottom" data-toggle="tooltip" title="{{ object.title }}">
                                 </a>
                                 <div class="p-1 text-overflow">
                                     <a href="{{ object.get_absolute_url }}?page={{ page_obj.number }}{% if list_type == 'tag' %}&tag={{ now_tag }}{% endif %}">
-                                       {{ object.title }}
+                                        {{ object.title }}
                                     </a>
                                 </div>
-                                <div class="list_date_view">{{ object.video_at|date:"Y-m-d" }}</div>
+                                <div class="list_date_view">{{ object.photo_at|date:"Y-m-d" }}</div>
                             </div>
                         {% endfor %}
                     </div>
+
                     {% if is_paginated %}
                         <nav class="mt-5">
                             <ul class="pagination justify-content-center">
@@ -124,7 +125,6 @@
                             </ul>
                         </nav>
                     {% endif %}
-
                 </div>
             </div>
         </div>

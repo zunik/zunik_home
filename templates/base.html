@@ -3,12 +3,24 @@
 <head>
     <title>{% block title %}Zunik Home{% endblock %}</title>
     <meta charset="utf-8">
-    <meta content="ie=edge" http-equiv="x-ua-compatible">
-    <meta content="template language" name="keywords">
-    <meta content="Tamerlan Soziev" name="author">
-    <meta content="Admin dashboard html template" name="description">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="keywords" content="{% block keywords %}bboy zunik coding{% endblock %}">
+    <meta name="description" content="{% block meta_desc %}안녕하세요 저의 스토리가 있는 공간입니다{% endblock %}">
+    <meta name="author" content="Juhun Cha">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% block og_title %}Zunik Home{% endblock %}">
+    <meta property="og:description" content="{% block og_desc %}안녕하세요 저의 스토리가 있는 공간입니다{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}http://zunik.me{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% endblock %}" >
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{% block twitter_title %}Zunik Home{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_desc %}안녕하세요 저의 스토리가 있는 공간입니다{% endblock %}">
+    <meta name="twitter:url" content="{% block twitter_url %}http://zunik.me{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% endblock %}">
 
+    <!-- static -->
     {% load static %}
     <link href="{% static 'img/favicon.png' %}" rel="shortcut icon">
     <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
@@ -161,6 +173,20 @@
                             </li>
                             <li>
                                 <a href="#">Favorite Videos</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="has-sub-menu  {% if '/photo/' in request.path %}active{% endif %}">
+                        <a href="{% url 'photo:my_list' %}">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-documents-07"></div>
+                            </div>
+                            <span>Photo</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="{% url 'photo:my_list' %}">My Photo</a>
                             </li>
                         </ul>
                     </li>

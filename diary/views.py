@@ -52,6 +52,7 @@ class OpenDiaryDetailView(DetailView):
             now_page = 1
         context['now_page'] = now_page
 
+        # 다음 글, 이전 글
         now_tag = self.request.GET.get('tag')
 
         if now_tag:
@@ -62,7 +63,7 @@ class OpenDiaryDetailView(DetailView):
             objects = Diary.objects
 
         context['next_object'] = objects.filter(hide=False).filter(diary_at__gte=context['object'].diary_at)\
-            .exclude(diary_at=context['object'].diary_at, id__lte=context['object'].id).order_by('-diary_at','-id').last()
+            .exclude(diary_at=context['object'].diary_at, id__lte=context['object'].id).order_by('-diary_at', '-id').last()
 
         context['prev_object'] = objects.filter(hide=False).filter(diary_at__lte=context['object'].diary_at)\
             .exclude(diary_at=context['object'].diary_at, id__gte=context['object'].id).order_by('-diary_at', '-id').first()
