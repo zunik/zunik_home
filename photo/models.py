@@ -5,10 +5,14 @@ from tagging.fields import TagField
 from django.urls import reverse
 
 
+def file_rename(instance, filename):
+    return "photo/{}" . format(filename)
+
+
 class Photo(models.Model):
     title = models.CharField(max_length=200)
     memo = models.TextField(null=True, blank=True)
-    photo = models.ImageField(upload_to="photo", width_field="width_field", height_field="height_field")
+    photo = models.ImageField(upload_to=file_rename, width_field="width_field", height_field="height_field")
     thumbnail = ImageSpecField(
         source = 'photo',
         processors = [Thumbnail(250, 250)],

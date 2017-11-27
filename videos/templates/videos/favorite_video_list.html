@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item">
+        <a href="{% url 'video:my_list' %}">Video</a>
+    </li>
+    <li class="breadcrumb-item">
+        <span>Favorite Video</span>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="content-box">
+        <div class="element-wrapper">
+            <h6 class="element-header">
+                Favorite Video
+            </h6>
+            <div class="todo-app-w">
+                <div class="todo-sidebar">
+                    <div class="todo-sidebar-section">
+                        <h4 class="todo-sidebar-section-header">
+                            <span>Filter</span>
+                        </h4>
+                        <div class="todo-sidebar-section-contents">
+                            <div class="todo-sidebar-section-sub-section">
+                                <div class="todo-sidebar-section-sub-header">
+                                    <i class="os-icon os-icon-ui-54"></i>
+                                    <h6>
+                                        Tags
+                                    </h6>
+                                </div>
+                                <div class="todo-sidebar-section-sub-section-content">
+                                    {% load tagging_tags %}
+                                    {% tags_for_model videos.FavoriteVideo as tags with counts %}
+                                    <ul class="items-list filter-list">
+                                        <li>
+                                            {% if not now_tag %}
+                                                <a href="{% url 'video:favorite_list' %}" class="active">
+                                                <i class="os-icon os-icon-checkmark"></i>
+                                            {% else %}
+                                                <a href="{% url 'video:favorite_list' %}">
+                                            {% endif %}
+                                            전체 보기
+                                            <span class="badge badge-pill badge-info">ALL</span>
+                                            </a>
+                                        </li>
+                                        {% for tag in tags %}
+                                            <li>
+                                                {% if now_tag and tag == now_tag %}
+                                                    <a href="{% url 'video:favorite_list_tag' tag %}" class="active">
+                                                        <i class="os-icon os-icon-checkmark"></i>
+                                                        {{ tag }}
+                                                        <span class="badge badge-pill badge-info">+{{ tag.count }}</span>
+                                                    </a>
+                                                {% else %}
+                                                    <a href="{% url 'video:favorite_list_tag' tag %}">
+                                                        {{ tag }}
+                                                        <span class="badge badge-pill badge-info">+{{ tag.count }}</span>
+                                                    </a>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="todo-content">
+                    <h4 class="todo-content-header">
+                        {% if list_type == 'all' %}
+                            <span>전체 보기</span>
+                        {% elif list_type == 'tag' %}
+                            <i class="os-icon os-icon-ui-54"></i><span>{{ now_tag }}</span>
+                        {% endif %}
+                    </h4>
+                    <div class="row mb-3">
+                        {% for object in object_list %}
+                            <div class="col-md-4 col-sm-6 col-12 mb-2">
+                                <a href="{{ object.get_absolute_url }}?page={{ page_obj.number }}{% if list_type == 'tag' %}&tag={{ now_tag }}{% endif %}">
+                                    <img src="{{ object.get_video_thumbnail }}" class="img-thumbnail  img-fluid" data-placement="bottom" data-toggle="tooltip" title="{{ object.title }}">
+                                </a>
+                                <div class="p-1 text-overflow">
+                                    <a href="{{ object.get_absolute_url }}?page={{ page_obj.number }}{% if list_type == 'tag' %}&tag={{ now_tag }}{% endif %}">
+                                       {{ object.title }}
+                                    </a>
+                                </div>
+                                <div class="list_date_view">{{ object.created_at|date:"Y-m-d" }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% include "pagination.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+{%  endblock %}
