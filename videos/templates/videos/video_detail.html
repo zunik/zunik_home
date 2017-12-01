@@ -39,7 +39,9 @@
                     {{ object.title }}
                 </h4>
                 <div class="form-desc">
-                    <i class="fa fa-calendar"></i> {{ object.video_at|date:"Y-m-d" }}
+                    <i class="fa fa-calendar" title="영상 날짜"></i> {{ object.video_at|date:"Y-m-d" }}
+
+                    <i class="fa fa-eye pl-2" title="조회수"></i> {{ object.hit_count.hits }}
                 </div>
                 <div class="element-box-content mb-5">
                     <div class="embed-responsive embed-responsive-16by9">

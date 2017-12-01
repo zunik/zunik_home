@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'tagging.apps.TaggingConfig',
     'markdown_deux',
     'pagedown',
+    'hitcount',
     # local apps
     'videos.apps.VideosConfig',
     'photo.apps.PhotoConfig',
@@ -94,7 +95,7 @@ WSGI_APPLICATION = 'zunik_home.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'zunik_home',
+        'NAME' : 'zunik_story',
         'USER' : 'chazunik',
         'PASSWORD' : 'Ddatabase12#$',
         'HOST' : '127.0.0.1'

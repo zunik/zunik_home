@@ -3,6 +3,8 @@ from tagging.views import TaggedObjectList
 from tagging.models import TaggedItem, Tag
 from .models import Photo
 from zunik_home.help import custom_paginator
+from hitcount.models import HitCount
+from hitcount.views import HitCountMixin
 
 
 class MyPhotoListView(ListView):
@@ -39,6 +41,10 @@ class MyPhotoDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(MyPhotoDetailView, self).get_context_data(**kwargs)
+
+        # 조회수
+        hit_count = HitCount.objects.get_for_object(context['object'])
+        hit_count_response = HitCountMixin.hit_count(self.request, hit_count)
 
         relation_num = 8
         context['related_list'] = TaggedItem.objects.get_related(context['object'], Photo, relation_num)

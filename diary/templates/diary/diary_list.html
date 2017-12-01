@@ -88,7 +88,10 @@
                                             {% endif %}
                                         </strong>
                                     </h5>
-                                    <span class="tasks-sub-header"><i class="fa fa-calendar"></i> {{ object.diary_at|date:"Y-m-d" }}</span>
+                                    <span class="tasks-sub-header">
+                                        <i class="fa fa-calendar" title="다이어리 작성 날짜"></i> {{ object.diary_at|date:"Y-m-d" }}
+                                        <i class="fa fa-eye pl-2" title="조회수"></i> {{ object.hit_count.hits }}
+                                    </span>
                                 </div>
                                 <div class="tasks-list-w">
                                     <div class="markdown-body">

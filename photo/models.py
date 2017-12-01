@@ -3,13 +3,16 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import Thumbnail
 from tagging.fields import TagField
 from django.urls import reverse
+from django.contrib.contenttypes.fields import GenericRelation
+from hitcount.models import HitCountMixin
+from hitcount.models import HitCount
 
 
 def file_rename(instance, filename):
     return "photo/{}" . format(filename)
 
 
-class Photo(models.Model):
+class Photo(models.Model, HitCountMixin):
     title = models.CharField(max_length=200)
     memo = models.TextField(null=True, blank=True)
     photo = models.ImageField(upload_to=file_rename, width_field="width_field", height_field="height_field")
@@ -26,6 +29,9 @@ class Photo(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     hide = models.BooleanField(default=False)
     tag = TagField()
+    hit_count_generic = GenericRelation(
+        HitCount, object_id_field='object_pk',
+        related_query_name='hit_count_generic_relation')
 
     class Meta:
         ordering = ['-photo_at', '-id']

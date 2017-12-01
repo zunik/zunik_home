@@ -12653,6 +12653,7 @@ strong {
   margin-bottom: 2rem;
   position: relative;
   z-index: 1;
+  padding-left:10px; /* custom zunik (add) */
 }
 
 .element-wrapper .element-header:after {
@@ -18067,7 +18068,8 @@ Contents:
   }
   .content-i .content-box {
     display: block;
-    padding: 15px;
+    /* custom zunik (padding:15px) */
+    padding: 0px;
   }
   .content-i .content-panel {
     padding: 15px;

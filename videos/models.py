@@ -1,9 +1,12 @@
 from django.db import models
 from tagging.fields import TagField
 from django.urls import reverse
+from django.contrib.contenttypes.fields import GenericRelation
+from hitcount.models import HitCountMixin
+from hitcount.models import HitCount
 
 
-class Video(models.Model):
+class Video(models.Model, HitCountMixin):
     title = models.CharField(max_length=200)
     video_id = models.CharField(max_length=255)
     memo = models.TextField(null=True, blank=True)
@@ -12,6 +15,9 @@ class Video(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     hide = models.BooleanField(default=False)
     tag = TagField()
+    hit_count_generic = GenericRelation(
+        HitCount, object_id_field='object_pk',
+        related_query_name='hit_count_generic_relation')
 
     class Meta:
         ordering = ['-video_at', '-id']
@@ -33,7 +39,7 @@ class Video(models.Model):
         return str(self.id)
 
 
-class FavoriteVideo(models.Model):
+class FavoriteVideo(models.Model, HitCountMixin):
     title = models.CharField(max_length=200)
     video_id = models.CharField(max_length=200)
     memo = models.TextField(null=True, blank=True)
@@ -41,6 +47,9 @@ class FavoriteVideo(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     hide = models.BooleanField(default=False)
     tag = TagField()
+    hit_count_generic = GenericRelation(
+        HitCount, object_id_field='object_pk',
+        related_query_name='hit_count_generic_relation')
 
     class Meta:
         ordering = ['-id']

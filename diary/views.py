@@ -3,6 +3,8 @@ from tagging.views import TaggedObjectList
 from tagging.models import TaggedItem, Tag
 from .models import Diary
 from zunik_home.help import custom_paginator
+from hitcount.models import HitCount
+from hitcount.views import HitCountMixin
 
 
 class OpenDiaryListView(ListView):
@@ -39,6 +41,10 @@ class OpenDiaryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(OpenDiaryDetailView, self).get_context_data(**kwargs)
+
+        # 조회수
+        hit_count = HitCount.objects.get_for_object(context['object'])
+        hit_count_response = HitCountMixin.hit_count(self.request, hit_count)
 
         object_path = '/diary/open/' + str(context['object'].id) + '/';
         context['mentioned_list'] = Diary.objects.filter(content__icontains=object_path)
