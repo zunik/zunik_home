@@ -10863,8 +10863,8 @@ strong {
   opacity: 0;
   -webkit-transform: translateY(20px);
           transform: translateY(20px);
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  -webkit-transition: all 0.2s ease; /* custom zunik (0.3s) */
+  transition: all 0.2s ease; /* custom zunik (0.3s) */
 }
 
 .menu-side-w .logged-user-menu .avatar-w {
@@ -16962,7 +16962,7 @@ TODO Application
   display: inline-block;
   font-size: 0.9rem;
   line-height: 1.2;
-  height: 1.08rem;
+  /* height: 1.08rem; custom zunik */
   overflow: hidden;
 }
 
@@ -17862,6 +17862,10 @@ Contents:
   }
   .todo-app-w .todo-content .tasks-list li.draggable-task {
     padding-right: 10px;
+  }
+  /* custom zunik (add) */
+  .todo-app-w .todo-sidebar .todo-sidebar-section-sub-section .todo-sidebar-section-sub-section-content ul li {
+    display:inline-block;
   }
   .full-chat-w .full-chat-i {
     display: block;

@@ -12,7 +12,7 @@ ul.filter-list li > a.active{color:#0d509a !important; font-weight: bold;}
 
 .todo-app-w .todo-sidebar .todo-sidebar-section-sub-section .todo-sidebar-section-sub-header{padding-right: 20px;}
 
-.list_date_view{font-size:0.9rem; color:rgba(0, 0, 0, 0.5); text-align:right;}
+.list_more_info{font-size:0.82em; color:rgba(0, 0, 0, 0.5); text-align:right;}
 
 .badge > a {color:#fff !important;}
 .badge > a:hover{text-decoration: none}

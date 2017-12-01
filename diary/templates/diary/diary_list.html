@@ -34,26 +34,18 @@
                                     {% tags_for_model diary.Diary as tags with counts %}
                                     <ul class="items-list filter-list">
                                         <li>
-                                            {% if not now_tag %}
-                                                <a href="{% url 'diary:open_list' %}" class="active">
-                                                <i class="os-icon os-icon-checkmark"></i>
-                                            {% else %}
-                                                <a href="{% url 'diary:open_list' %}">
-                                            {% endif %}
-                                            전체 보기
-                                            <span class="badge badge-pill badge-info">ALL</span>
+                                            <a href="{% url 'diary:open_list' %}">
+                                                <span class="badge {% if not now_tag %}badge-primary{% else %}badge-default{% endif %} p-2">
+                                                    전체 보기 ( ALL )
+                                                </span>
                                             </a>
                                         </li>
                                         {% for tag in tags %}
                                             <li>
-                                                {% if now_tag and tag == now_tag %}
-                                                    <a href="{% url 'diary:open_list_tag' tag %}" class="active">
-                                                    <i class="os-icon os-icon-checkmark"></i>
-                                                {% else %}
-                                                    <a href="{% url 'diary:open_list_tag' tag %}">
-                                                {% endif %}
-                                                {{ tag }}
-                                                <span class="badge badge-pill badge-info">+{{ tag.count }}</span>
+                                                <a href="{% url 'diary:open_list_tag' tag %}">
+                                                    <span class="badge {% if now_tag and tag == now_tag %}badge-primary{% else %}badge-default{% endif %} p-2">
+                                                        {{ tag }} ( {{ tag.count }} )
+                                                    </span>
                                                 </a>
                                             </li>
                                         {% endfor %}

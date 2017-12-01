@@ -33,31 +33,20 @@
                                     {% load tagging_tags %}
                                     {% tags_for_model videos.Video as tags with counts %}
                                     <ul class="items-list filter-list">
-                                        <li>
-                                            {% if not now_tag %}
-                                                <a href="{% url 'video:my_list' %}" class="active">
-                                                <i class="os-icon os-icon-checkmark"></i>
-                                            {% else %}
-                                                <a href="{% url 'video:my_list' %}">
-                                            {% endif %}
-                                            전체 보기
-                                            <span class="badge badge-pill badge-info">ALL</span>
+                                       <li>
+                                            <a href="{% url 'video:my_list' %}">
+                                                <span class="badge {% if not now_tag %}badge-primary{% else %}badge-default{% endif %} p-2">
+                                                    전체 보기 ( ALL )
+                                                </span>
                                             </a>
                                         </li>
                                         {% for tag in tags %}
                                             <li>
-                                                {% if now_tag and tag == now_tag %}
-                                                    <a href="{% url 'video:my_list_tag' tag %}" class="active">
-                                                        <i class="os-icon os-icon-checkmark"></i>
-                                                        {{ tag }}
-                                                        <span class="badge badge-pill badge-info">+{{ tag.count }}</span>
-                                                    </a>
-                                                {% else %}
-                                                    <a href="{% url 'video:my_list_tag' tag %}">
-                                                        {{ tag }}
-                                                        <span class="badge badge-pill badge-info">+{{ tag.count }}</span>
-                                                    </a>
-                                                {% endif %}
+                                                <a href="{% url 'video:my_list_tag' tag %}">
+                                                    <span class="badge {% if now_tag and tag == now_tag %}badge-primary{% else %}badge-default{% endif %} p-2">
+                                                        {{ tag }} ( {{ tag.count }} )
+                                                    </span>
+                                                </a>
                                             </li>
                                         {% endfor %}
                                     </ul>
@@ -87,7 +76,10 @@
                                        {{ object.title }}
                                     </a>
                                 </div>
-                                <div class="list_date_view">{{ object.video_at|date:"Y-m-d" }}</div>
+                                <div class="list_more_info">
+                                    <i class="fa fa-calendar" title="영상 날짜"></i> {{ object.video_at|date:"Y-m-d" }}
+                                    <i class="fa fa-eye pl-2" title="조회수"></i> {{ object.hit_count.hits }}
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
