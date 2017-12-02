@@ -81,6 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'zunik_home.context_processors.global_settings',
             ],
         },
     },
@@ -187,3 +188,5 @@ MARKDOWN_DEUX_STYLES = {
         "safe_mode": False
     },
 }
+
+SITE_DOMAIN = 'http://dev.zunik.me:8000'

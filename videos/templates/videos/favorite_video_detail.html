@@ -6,12 +6,10 @@
 
 {% block og_title %}{{ object.title }}{% endblock %}
 {% block og_desc  %}{{ object.memo|striptags|truncatechars:50 }}{% endblock %}
-{% block og_url %}{{ block.super }}{{ object.get_absolute_url }}{% endblock %}
 {% block og_image %}https:{{ object.get_video_thumbnail }}{% endblock %}
 
 {% block twitter_title %}{{ object.title }}{% endblock %}
 {% block twitter_desc  %}{{ object.memo|striptags|truncatechars:50 }}{% endblock %}
-{% block twitter_url %}{{ block.super }}{{ object.get_absolute_url }}{% endblock %}
 {% block twitter_image %}https:{{ object.get_video_thumbnail }}{% endblock %}
 
 {% block main_class %}with-side-panel{% endblock %}
@@ -36,9 +34,9 @@
                     {{ object.title }}
                 </h4>
                 <div class="form-desc">
-                    <i class="fa fa-calendar" title="업로드 시간"></i> {{ object.created_at|date:"Y-m-d" }}
+                    <i class="fa fa-calendar" title="업로드 시간"></i> <span title="업로드 날짜">{{ object.created_at|date:"Y-m-d" }}</span>
 
-                    <i class="fa fa-eye pl-2" title="조회수"></i> {{ object.hit_count.hits }}
+                    <i class="fa fa-eye pl-2" title="조회수"></i> <span title="조회수">{{ object.hit_count.hits }}</span>
                 </div>
                 <div class="element-box-content mb-5">
                     <div class="embed-responsive embed-responsive-16by9">
@@ -83,6 +81,7 @@
                 <div>
                     {% load disqus_tags %}
                     {% set_disqus_identifier "zunik_favorite_video_" object.get_id_string_format %}
+                    {% set_disqus_url object.get_absolute_url %}
                     {% disqus_show_comments %}
                 </div>
             </div>

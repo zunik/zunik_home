@@ -17678,7 +17678,8 @@ Contents:
   .menu-mobile .logged-user-w .avatar-w img {
     width: 35px;
   }
-  .menu-mobile .logged-user-w .logged-user-info-w {
+  /* custom zunik (mobile-content add) */
+  .menu-mobile .logged-user-w .logged-user-info-w, #mobile-contact {
     display: none;
   }
   .menu-mobile ul.main-menu {

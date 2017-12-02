@@ -12,6 +12,10 @@ def file_rename(instance, filename):
     return "photo/{}" . format(filename)
 
 
+def file_rename_other(instance, filename):
+    return "photo/other/{}" . format(filename)
+
+
 class Photo(models.Model, HitCountMixin):
     title = models.CharField(max_length=200)
     memo = models.TextField(null=True, blank=True)
@@ -45,3 +49,15 @@ class Photo(models.Model, HitCountMixin):
 
     def get_id_string_format(self):
         return str(self.id)
+
+
+class OtherPhoto(models.Model):
+    title = models.CharField(max_length=200)
+    photo = models.ImageField(upload_to=file_rename_other, width_field="width_field", height_field="height_field")
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title

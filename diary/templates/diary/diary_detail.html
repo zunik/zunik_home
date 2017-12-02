@@ -2,15 +2,13 @@
 
 {% block title %}{{ object.title }}{% endblock %}
 {% block keywords %}{{ object.tag }}{% endblock %}
-{% block meta_desc  %}{{ object.content|striptags|truncatechars:80 }}{% endblock %}
+{% block meta_desc %}{{ object.content|striptags|truncatechars:80 }}{% endblock %}
 
 {% block og_title %}{{ object.title }}{% endblock %}
-{% block og_desc  %}{{ object.content|striptags|truncatechars:50 }}{% endblock %}
-{% block og_url %}{{ block.super }}{{ object.get_absolute_url }}{% endblock %}
+{% block og_desc %}{{ object.content|striptags|truncatechars:50 }}{% endblock %}
 
 {% block twitter_title %}{{ object.title }}{% endblock %}
-{% block twitter_desc  %}{{ object.content|striptags|truncatechars:50 }}{% endblock %}
-{% block twitter_url %}{{ block.super }}{{ object.get_absolute_url }}{% endblock %}
+{% block twitter_desc %}{{ object.content|striptags|truncatechars:50 }}{% endblock %}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item">
@@ -32,8 +30,9 @@
                     {{ object.title }}
                 </h4>
                 <div class="form-desc">
-                    <i class="fa fa-calendar" title="다이어리 작성 날짜"></i> {{ object.diary_at|date:"Y-m-d" }}
-                    <i class="fa fa-eye pl-2" title="조회수"></i> {{ object.hit_count.hits }}
+                    <i class="fa fa-calendar" title="다이어리 작성 날짜"></i> <span title="다이어리 작성 날짜">{{ object.diary_at|date:"Y-m-d" }}</span>
+                    <i class="fa fa-cloud-upload pl-2" title="업로드 날짜"></i> <span title="업로드 날짜">{{ object.created_at|date:"Y-m-d" }}</span>
+                    <i class="fa fa-eye pl-2" title="조회수"></i> <span title="조회수">{{ object.hit_count.hits }}</span>
                 </div>
                 <div class="element-box-content mb-3">
                     <div class="mt-2 markdown-body embed-md-convert">
@@ -97,6 +96,7 @@
                 <div>
                     {% load disqus_tags %}
                     {% set_disqus_identifier "zunik_diary_" object.get_id_string_format %}
+                    {% set_disqus_url object.get_absolute_url %}
                     {% disqus_show_comments %}
                 </div>
             </div>

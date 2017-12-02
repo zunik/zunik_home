@@ -88,7 +88,12 @@
                                 <div class="tasks-list-w">
                                     <div class="markdown-body diary-list-view-content">
                                         {% load markdown_deux_tags %}
-                                        {{ object.content|markdown|truncatechars_html:100 }}
+                                        {{ object.content|markdown|truncatechars_html:80 }}
+                                    </div>
+                                    <div class="mt-3">
+                                        <a href="{{ object.get_absolute_url }}?page={{ page_obj.number }}{% if list_type == 'tag' %}&tag={{ now_tag }}{% endif %}">
+                                            <strong>자세히 보기</strong>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

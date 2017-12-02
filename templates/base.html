@@ -11,13 +11,13 @@
     <!-- Open Graph -->
     <meta property="og:title" content="{% block og_title %}Zunik Home{% endblock %}">
     <meta property="og:description" content="{% block og_desc %}안녕하세요 저의 스토리가 있는 공간입니다{% endblock %}">
-    <meta property="og:url" content="{% block og_url %}http://zunik.me{% endblock %}">
+    <meta property="og:url" content="{{ SITE_DOMAIN }}{{ request.path }}">
     <meta property="og:image" content="{% block og_image %}{% endblock %}" >
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{% block twitter_title %}Zunik Home{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_desc %}안녕하세요 저의 스토리가 있는 공간입니다{% endblock %}">
-    <meta name="twitter:url" content="{% block twitter_url %}http://zunik.me{% endblock %}">
+    <meta name="twitter:url" content="{{ SITE_DOMAIN }}{{ request.path }}">
     <meta name="twitter:image" content="{% block twitter_image %}{% endblock %}">
 
     <!-- static -->
@@ -67,6 +67,12 @@
                             JuHun Cha
                         </div>
                     </div>
+                    <span id="mobile-contact">
+                        <a href="mailto:chazunik@gmail.com" class="pl-3"><i class="picons-social-icon-gmail"></i></a>
+                        <a href="https://www.facebook.com/nik.zu.7" class="pl-2" target="_blank"><i class="picons-social-icon-facebook"></i></a>
+                        <a href="https://www.instagram.com/zunik_cha/" class="pl-2" target="_blank"><i class="picons-social-icon-instagram"></i></a>
+                        <a href="https://github.com/zunik" class="pl-2" target="_blank"><i class="picons-social-icon-github"></i></a>
+                    </span>
                 </div>
                 <!--------------------
                 START - Mobile Menu List
@@ -166,10 +172,10 @@
                                     <a href="https://www.facebook.com/nik.zu.7" target="_blank"><i class="picons-social-icon-facebook"></i><span>Facebook</span></a>
                                 </li>
                                 <li>
-                                    <a href="https://github.com/zunik" target="_blank"><i class="picons-social-icon-github"></i><span>Git Hub</span></a>
+                                     <a href="https://www.instagram.com/zunik_cha/" target="_blank"><i class="picons-social-icon-instagram"></i><span>Instagram</span></a>
                                 </li>
                                 <li>
-                                     <a href="https://www.instagram.com/zunik_cha/" target="_blank"><i class="picons-social-icon-instagram"></i><span>Instagram</span></a>
+                                    <a href="https://github.com/zunik" target="_blank"><i class="picons-social-icon-github"></i><span>Git Hub</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -265,5 +271,12 @@
 <script src="{% static 'bootstrap/js/dist/popover.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 <script src="{% static 'js/myscript.js' %}"></script>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript">
+    var addthis_share = {
+        url: "{{ SITE_DOMAIN }}{{ request.path }}"
+    }
+</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a22c8b719a471f8"></script>
 </body>
 </html>
