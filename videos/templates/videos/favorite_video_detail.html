@@ -61,16 +61,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12 col-md-6 mb-1">
+                    <div class="col-sm-6 col-md-6 mb-1">
                         {% if next_object %}
-                            <a href="{{ next_object.get_absolute_url }}?page={{ now_page }}{% if now_tag %}&tag={{ now_tag }}{% endif %}" class="btn btn-primary">
+                            <a href="{{ next_object.get_absolute_url }}?page={{ now_page }}{% if now_tag %}&tag={{ now_tag }}{% endif %}" class="btn btn-primary" title="{{ next_object.title }}">
                                 <i class="fa fa-chevron-left"></i> {{ next_object.title|truncatechars:20 }}
                             </a>
                         {% endif %}
                     </div>
-                    <div class="text-right col-sm-12 col-md-6 mb-1">
+                    <div class="text-right col-sm-6 col-md-6 mb-1">
                          {% if prev_object %}
-                            <a href="{{ prev_object.get_absolute_url }}?page={{ now_page }}{% if now_tag %}&tag={{ now_tag }}{% endif %}" class="btn btn-primary">
+                            <a href="{{ prev_object.get_absolute_url }}?page={{ now_page }}{% if now_tag %}&tag={{ now_tag }}{% endif %}" class="btn btn-primary" title="{{ prev_object.title }}">
                                 {{ prev_object.title|truncatechars:20 }} <i class="fa fa-chevron-right"></i>
                             </a>
                         {% endif %}

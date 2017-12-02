@@ -44,7 +44,7 @@
         -------------------->
         <div class="menu-mobile menu-activated-on-click color-scheme-dark">
             <div class="mm-logo-buttons-w">
-                <a class="mm-logo" href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}"><span>Zunik Story</span></a>
+                <a class="mm-logo" href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}"></a>
                 <div class="mm-buttons">
                     <div class="content-panel-open">
                         <div class="os-icon os-icon-grid-circles"></div>
@@ -75,6 +75,19 @@
                     <li class="has-sub-menu">
                         <a href="index.html">
                             <div class="icon-w">
+                                <div class="os-icon os-icon-ui-55"></div>
+                            </div>
+                            <span>Diary</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="{% url 'diary:open_list' %}">Open Diary</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub-menu">
+                        <a href="index.html">
+                            <div class="icon-w">
                                 <div class="os-icon os-icon-others-29"></div>
                             </div>
                             <span>Video</span>
@@ -82,6 +95,22 @@
                         <ul class="sub-menu">
                             <li>
                                 <a href="{% url 'video:my_list' %}">My Video</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'video:favorite_list' %}">Favorite Video</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub-menu">
+                        <a href="index.html">
+                            <div class="icon-w">
+                                <div class="os-icon os-icon-documents-07"></div>
+                            </div>
+                            <span>Photo</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="{% url 'photo:my_list' %}">My Photo</a>
                             </li>
                         </ul>
                     </li>
@@ -172,7 +201,7 @@
                                 <a href="{% url 'video:my_list' %}">My Video</a>
                             </li>
                             <li>
-                                <a href="{% url 'video:favorite_list' %}">Favorite Videos</a>
+                                <a href="{% url 'video:favorite_list' %}">Favorite Video</a>
                             </li>
                         </ul>
                     </li>

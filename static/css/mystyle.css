@@ -18,3 +18,10 @@ ul.filter-list li > a.active{color:#0d509a !important; font-weight: bold;}
 .badge > a:hover{text-decoration: none}
 
 strong{font-weight:700}
+
+/* a tag disable */
+.a-tag-disable {
+    pointer-events: none;
+    cursor: default;
+    color: #000 !important;
+}

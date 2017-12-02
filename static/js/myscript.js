@@ -40,4 +40,7 @@ $(function(){
             $(this).html(embed_before + embed_size + embed_before2 + embed_src + embed_after)
         })
     }
+
+    // diary list 에 표현되는 content 에서는 링크 작동이 안되게
+    $(".diary-list-view-content").find("a").removeAttr("href").addClass('a-tag-disable')
 })

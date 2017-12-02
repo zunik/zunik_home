@@ -18015,6 +18015,11 @@ Contents:
   }
   .menu-mobile {
     display: block;
+    /* custom zunik (add) start */
+    position:fixed;
+    width: 100%;
+    z-index:9999;
+    /* end */
   }
   .element-info .element-search {
     margin-top: 1rem;
@@ -18066,6 +18071,7 @@ Contents:
   }
   .content-w, .menu-side .content-w {
     display: block;
+    margin-top:55px; /* custom zunik (add) */
   }
   .content-i {
     display: block;
