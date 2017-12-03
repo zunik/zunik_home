@@ -9,6 +9,7 @@ from zunik_home.settings import SITE_DOMAIN
 
 class Diary(models.Model, HitCountMixin):
     title = models.CharField(max_length=200)
+    description = models.CharField(max_length=255, default='간략한 내용')
     content = models.TextField()
     diary_at = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)

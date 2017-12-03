@@ -45,9 +45,6 @@ $(function(){
     var $img_markdown = $(".markdown-body p img")
 
      if ($img_markdown.length > 0) {
-        $img_markdown.wrap("<div class='col-md-10'></div>").closest('p').attr('align', 'center')
+         $img_markdown.wrap("<div class='col-md-10'></div>").closest('p').attr('align', 'center')
      }
-
-    // diary list 에 표현되는 content 에서는 링크 작동이 안되게
-    $(".diary-list-view-content").find("a").removeAttr("href").addClass('a-tag-disable')
 })

@@ -1,3 +1,4 @@
+/* custom style */
 .todo-app-w .todo-sidebar { flex : none}
 
 .menu-side-compact-w .logged-user-w .avatar-w img{ width:55px; }
@@ -19,14 +20,9 @@ ul.filter-list li > a.active{color:#0d509a !important; font-weight: bold;}
 .badge > a {color:#fff !important;}
 .badge > a:hover{text-decoration: none}
 
-strong{font-weight:700}
+.todo-app-w .todo-content .tasks-header-w { margin-bottom:10px }
 
-/* a tag disable */
-.a-tag-disable {
-    pointer-events: none;
-    cursor: default;
-    color: #000 !important;
-}
+strong{font-weight:700}
 
 #mobile-contact a {color:rgba(255, 255, 255, 0.5); font-size:1.4rem; text-decoration: none}
 
