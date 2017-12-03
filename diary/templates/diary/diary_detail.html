@@ -10,6 +10,9 @@
 {% block twitter_title %}{{ object.title }}{% endblock %}
 {% block twitter_desc %}{{ object.description }}{% endblock %}
 
+{% block og_image %}{% if object.main_img %}{{ SITE_DOMAIN }}{{ object.main_img|cut:" " }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block twitter_image %}{% if object.main_img %}{{ SITE_DOMAIN }}{{ object.main_img|cut:" " }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+
 {% block breadcrumb %}
     <li class="breadcrumb-item">
         <a href="{% url 'diary:open_list' %}">Diary</a>

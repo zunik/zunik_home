@@ -12,6 +12,7 @@ class Diary(models.Model, HitCountMixin):
     description = models.CharField(max_length=255, default='간략한 내용')
     content = models.TextField()
     diary_at = models.DateField()
+    main_img = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     hide = models.BooleanField(default=False)
