@@ -30,7 +30,7 @@
                     {{ object.title }}
                 </h4>
                 <div class="form-desc">
-                    <i class="fa fa-calendar" title="다이어리 작성 날짜"></i> <span title="다이어리 작성 날짜">{{ object.diary_at|date:"Y-m-d" }}</span>
+                    <i class="fa fa-pencil" title="다이어리 작성 날짜"></i> <span title="다이어리 작성 날짜">{{ object.diary_at|date:"Y-m-d" }}</span>
                     <i class="fa fa-cloud-upload pl-2" title="업로드 날짜"></i> <span title="업로드 날짜">{{ object.created_at|date:"Y-m-d" }}</span>
                     <i class="fa fa-eye pl-2" title="조회수"></i> <span title="조회수">{{ object.hit_count.hits }}</span>
                 </div>
@@ -96,7 +96,7 @@
                 <div>
                     {% load disqus_tags %}
                     {% set_disqus_identifier "zunik_diary_" object.get_id_string_format %}
-                    {% set_disqus_url object.get_absolute_url %}
+                    {% set_disqus_url object.get_full_absolute_url %}
                     {% disqus_show_comments %}
                 </div>
             </div>

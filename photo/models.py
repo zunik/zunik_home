@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 from hitcount.models import HitCountMixin
 from hitcount.models import HitCount
+from zunik_home.settings import SITE_DOMAIN
 
 
 def file_rename(instance, filename):
@@ -46,6 +47,9 @@ class Photo(models.Model, HitCountMixin):
     @property
     def get_absolute_url(self):
         return reverse('photo:my_detail', args=[str(self.id)])
+
+    def get_full_absolute_url(self):
+        return SITE_DOMAIN + reverse('photo:my_detail', args=[str(self.id)])
 
     def get_id_string_format(self):
         return str(self.id)

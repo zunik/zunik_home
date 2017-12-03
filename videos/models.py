@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 from hitcount.models import HitCountMixin
 from hitcount.models import HitCount
+from zunik_home.settings import SITE_DOMAIN
 
 
 class Video(models.Model, HitCountMixin):
@@ -28,6 +29,9 @@ class Video(models.Model, HitCountMixin):
     @property
     def get_absolute_url(self):
         return reverse('video:my_detail', args=[str(self.id)])
+
+    def get_full_absolute_url(self):
+        return SITE_DOMAIN + reverse('video:my_detail', args=[str(self.id)])
 
     def get_video_url(self):
         return "//www.youtube.com/embed/" + self.video_id + "?rel=0"
@@ -60,6 +64,9 @@ class FavoriteVideo(models.Model, HitCountMixin):
     @property
     def get_absolute_url(self):
         return reverse('video:favorite_detail', args=[str(self.id)])
+
+    def get_full_absolute_url(self):
+        return SITE_DOMAIN + reverse('video:favorite_detail', args=[str(self.id)])
 
     def get_video_url(self):
         return "//www.youtube.com/embed/" + self.video_id + "?rel=0"

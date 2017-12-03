@@ -79,7 +79,7 @@
                 <div>
                     {% load disqus_tags %}
                     {% set_disqus_identifier "zunik_my_photo_" object.get_id_string_format %}
-                    {% set_disqus_url object.get_absolute_url %}
+                    {% set_disqus_url object.get_full_absolute_url %}
                     {% disqus_show_comments %}
                 </div>
             </div>
