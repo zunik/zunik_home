@@ -29,3 +29,18 @@ strong{font-weight:700}
 }
 
 #mobile-contact a {color:rgba(255, 255, 255, 0.5); font-size:1.4rem; text-decoration: none}
+
+/* sub menu hover active */
+.menu-side-w ul.sub-menu li a.hover-active{
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-transform: translateX(-5px);
+    transform: translateX(-5px);
+}
+.menu-side-w ul.sub-menu li a.hover-active:before {
+    -webkit-transform: translate(-5px, -50%);
+    transform: translate(-5px, -50%);
+    border-radius: 6px;
+    background-color: #047bf8;
+    border-color: #047bf8;
+}

@@ -47,6 +47,9 @@
                         {{ object.memo|markdown }}
                     </div>
                     <div class="mt-5">
+                        <div class="fb-like" data-href="{{ SITE_DOMAIN }}{{ request.path }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+                    </div>
+                    <div class="mt-4">
                         {% load tagging_tags %}
                         {% tags_for_object object as tags %}
 

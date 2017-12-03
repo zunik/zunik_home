@@ -2,23 +2,24 @@
 <html>
 <head>
     <title>{% block title %}Zunik Story{% endblock %}</title>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="keywords" content="{% block keywords %}bboy zunik coding{% endblock %}">
-    <meta name="description" content="{% block meta_desc %}안녕하세요 저의 스토리가 있는 공간입니다{% endblock %}">
-    <meta name="author" content="Juhun Cha">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="keywords" content="{% block keywords %}bboy zunik coding{% endblock %}" />
+    <meta name="description" content="{% block meta_desc %}안녕하세요 저의 스토리가 있는 공간입니다{% endblock %}" />
+    <meta name="author" content="Juhun Cha" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Open Graph -->
-    <meta property="og:title" content="{% block og_title %}Zunik Home{% endblock %}">
-    <meta property="og:description" content="{% block og_desc %}안녕하세요 저의 스토리가 있는 공간입니다{% endblock %}">
-    <meta property="og:url" content="{{ SITE_DOMAIN }}{{ request.path }}">
-    <meta property="og:image" content="{% block og_image %}{% endblock %}" >
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{% block og_title %}Zunik Home{% endblock %}" />
+    <meta property="og:description" content="{% block og_desc %}안녕하세요 저의 스토리가 있는 공간입니다{% endblock %}" />
+    <meta property="og:url" content="{{ SITE_DOMAIN }}{{ request.path }}" />
+    <meta property="og:image" content="{% block og_image %}{% endblock %}" />
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{% block twitter_title %}Zunik Home{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_desc %}안녕하세요 저의 스토리가 있는 공간입니다{% endblock %}">
-    <meta name="twitter:url" content="{{ SITE_DOMAIN }}{{ request.path }}">
-    <meta name="twitter:image" content="{% block twitter_image %}{% endblock %}">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{% block twitter_title %}Zunik Home{% endblock %}" />
+    <meta name="twitter:description" content="{% block twitter_desc %}안녕하세요 저의 스토리가 있는 공간입니다{% endblock %}" />
+    <meta name="twitter:url" content="{{ SITE_DOMAIN }}{{ request.path }}" />
+    <meta name="twitter:image" content="{% block twitter_image %}{% endblock %}" />
 
     <!-- static -->
     {% load static %}
@@ -192,7 +193,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="{% url 'diary:open_list' %}">Open Diary</a>
+                                <a href="{% url 'diary:open_list' %}" {% if '/diary/open/' in request.path %}class="hover-active"{% endif %}>Open Diary</a>
                             </li>
                         </ul>
                     </li>
@@ -205,10 +206,10 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="{% url 'video:my_list' %}">My Video</a>
+                                <a href="{% url 'video:my_list' %}" {% if '/video/my/' in request.path %}class="hover-active"{% endif %}>My Video</a>
                             </li>
                             <li>
-                                <a href="{% url 'video:favorite_list' %}">Favorite Video</a>
+                                <a href="{% url 'video:favorite_list' %}" {% if '/video/favorite/' in request.path %}class="hover-active"{% endif %}>Favorite Video</a>
                             </li>
                         </ul>
                     </li>
@@ -222,7 +223,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="{% url 'photo:my_list' %}">My Photo</a>
+                                <a href="{% url 'photo:my_list' %}" {% if '/photo/my/' in request.path %}class="hover-active"{% endif %}>My Photo</a>
                             </li>
                         </ul>
                     </li>
@@ -279,6 +280,17 @@
     }
 </script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a22c8b719a471f8"></script>
+<!-- end addthis -->
+<!-- facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.11&appId=325577037923042';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- facebook end -->
 {% block javascript %}{% endblock %}
 </body>
 </html>

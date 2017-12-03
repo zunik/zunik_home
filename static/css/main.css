@@ -11138,14 +11138,12 @@ strong {
   transition: all 0.2s ease;
   border-radius: 6px;
 }
-
 .menu-side-w ul.sub-menu li a:hover {
   text-decoration: none;
   cursor: pointer;
   -webkit-transform: translateX(-5px);
           transform: translateX(-5px);
 }
-
 .menu-side-w ul.sub-menu li a:hover:before {
   -webkit-transform: translate(-5px, -50%);
           transform: translate(-5px, -50%);
