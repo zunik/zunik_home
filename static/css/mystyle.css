@@ -40,3 +40,8 @@ strong{font-weight:700}
     background-color: #047bf8;
     border-color: #047bf8;
 }
+
+.diary-thumbnail {
+    float:left;
+    padding-right:10px;
+}

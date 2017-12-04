@@ -36,3 +36,9 @@ class Diary(models.Model, HitCountMixin):
 
     def get_id_string_format(self):
         return str(self.id)
+
+    def get_main_img_url(self):
+        if self.main_img:
+            return SITE_DOMAIN + self.main_img
+        else:
+            return False

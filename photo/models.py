@@ -1,6 +1,6 @@
 from django.db import models
 from imagekit.models import ImageSpecField
-from imagekit.processors import Thumbnail
+from imagekit.processors import Thumbnail, ResizeToFit
 from tagging.fields import TagField
 from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericRelation
@@ -44,6 +44,10 @@ class Photo(models.Model, HitCountMixin):
     def __str__(self):
         return self.title
 
+    def delete(self, *args, **kwargs):
+        self.photo.delete()
+        super(Photo, self).delete(*args, **kwargs)
+
     @property
     def get_absolute_url(self):
         return reverse('photo:my_detail', args=[str(self.id)])
@@ -57,7 +61,11 @@ class Photo(models.Model, HitCountMixin):
 
 class OtherPhoto(models.Model):
     title = models.CharField(max_length=200)
-    photo = models.ImageField(upload_to=file_rename_other, width_field="width_field", height_field="height_field")
+    photo = models.ImageField(
+        upload_to=file_rename_other,
+        width_field="width_field",
+        height_field="height_field"
+    )
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -65,3 +73,8 @@ class OtherPhoto(models.Model):
 
     def __str__(self):
         return self.title
+
+    def delete(self, *args, **kwargs):
+        self.photo.delete()
+        super(OtherPhoto, self).delete(*args, **kwargs)
+

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'markdown_deux',
     'pagedown',
     'hitcount',
+    'sorl.thumbnail',
     # local apps
     'videos.apps.VideosConfig',
     'photo.apps.PhotoConfig',

@@ -66,6 +66,7 @@
                         {% endif %}
                     </h4>
                     <div class="all-tasks-w">
+                        {% load thumbnail %}
                         {% for object in object_list %}
                             <div class="tasks-section">
                                 <div class="tasks-header-w">
@@ -81,18 +82,24 @@
                                         </strong>
                                     </h5>
                                     <span class="tasks-sub-header">
-                                        <i class="fa fa-calendar" title="다이어리 작성 날짜"></i> {{ object.diary_at|date:"Y-m-d" }}
+                                        <i class="fa fa-pencil" title="다이어리 작성 날짜"></i> {{ object.diary_at|date:"Y-m-d" }}
                                         <i class="fa fa-eye pl-2" title="조회수"></i> {{ object.hit_count.hits }}
                                     </span>
                                 </div>
                                 <div class="tasks-list-w">
                                     <div>
-                                        {{ object.description }}
-                                    </div>
-                                    <div class="mt-3">
-                                        <a href="{{ object.get_absolute_url }}?page={{ page_obj.number }}{% if list_type == 'tag' %}&tag={{ now_tag }}{% endif %}">
-                                            <strong>...전체 보기</strong>
-                                        </a>
+                                        {% thumbnail object.get_main_img_url "150x150" crop="center" as im %}
+                                            <div class="diary-thumbnail">
+                                                <img src="{{ im.url }}">
+                                            </div>
+                                        {% endthumbnail %}
+                                        <div>
+                                            {{ object.description }}
+                                            <a href="{{ object.get_absolute_url }}?page={{ page_obj.number }}{% if list_type == 'tag' %}&tag={{ now_tag }}{% endif %}" class="ml-2">
+                                                <strong>...전체 보기</strong>
+                                            </a>
+                                        </div>
+                                        <div style="clear:both;"></div>
                                     </div>
                                 </div>
                             </div>
