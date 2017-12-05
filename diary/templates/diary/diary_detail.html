@@ -10,8 +10,8 @@
 {% block twitter_title %}{{ object.title }}{% endblock %}
 {% block twitter_desc %}{{ object.description }}{% endblock %}
 
-{% block og_image %}{% if object.main_img %}{{ SITE_DOMAIN }}{{ object.main_img|cut:" " }}{% else %}{{ block.super }}{% endif %}{% endblock %}
-{% block twitter_image %}{% if object.main_img %}{{ SITE_DOMAIN }}{{ object.main_img|cut:" " }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block og_image %}{% if object.main_img %}{{ object.get_main_img_url }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block twitter_image %}{% if object.main_img %}{{ object.get_main_img_url }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item">

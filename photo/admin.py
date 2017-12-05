@@ -11,5 +11,10 @@ class PhotoAdmin(admin.ModelAdmin):
     }
     search_fields = ['title']
 
+
+class OtherPhotoAdmin(admin.ModelAdmin):
+    list_display = ['title', 'photo', 'created_at']
+    search_fields = ['title', 'photo']
+
 admin.site.register(Photo, PhotoAdmin)
-admin.site.register(OtherPhoto)
+admin.site.register(OtherPhoto, OtherPhotoAdmin)

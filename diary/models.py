@@ -39,6 +39,11 @@ class Diary(models.Model, HitCountMixin):
 
     def get_main_img_url(self):
         if self.main_img:
-            return SITE_DOMAIN + self.main_img
+            if self.main_img.startswith('/media/'):
+                return SITE_DOMAIN + self.main_img
+            elif self.main_img.startswith('youtube_id:'):
+                return "https://img.youtube.com/vi/" + self.main_img.split(':')[1] + "/hqdefault.jpg"
+            else:
+                return self.main_img
         else:
             return False
