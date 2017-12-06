@@ -90,7 +90,9 @@
                                     <div>
                                         {% thumbnail object.get_main_img_url "150x150" crop="center" as im %}
                                             <div class="diary-thumbnail">
-                                                <img src="{{ im.url }}">
+                                                <a href="{{ object.get_absolute_url }}?page={{ page_obj.number }}{% if list_type == 'tag' %}&tag={{ now_tag }}{% endif %}">
+                                                    <img src="{{ im.url }}" alt="{{ object.title }}">
+                                                </a>
                                             </div>
                                         {% endthumbnail %}
                                         <div>
