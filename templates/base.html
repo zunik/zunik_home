@@ -272,7 +272,7 @@
 <script src="{% static 'bootstrap/js/dist/tooltip.js' %}"></script>
 <script src="{% static 'bootstrap/js/dist/popover.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
-<script src="{% static 'js/myscript.js' %}"></script>
+{% block scripts %}{% endblock %}
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript">
     var addthis_share = {
@@ -291,6 +291,5 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <!-- facebook end -->
-{% block javascript %}{% endblock %}
 </body>
 </html>

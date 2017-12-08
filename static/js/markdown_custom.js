@@ -42,9 +42,24 @@ $(function(){
         })
     }
     //---------------
-    var $img_markdown = $(".markdown-body p img")
+    // 내부 링크 제외하고 다 _blank
+    var $markdown_body = $(".markdown-body")
+
+    var $markdown_a = $markdown_body.find('a')
+
+    if ($markdown_a.length != 0) {
+        $markdown_a.each(function (index) {
+            var href = $(this).attr('href')
+            if (href.indexOf('/diary/open/') == -1) {
+                $(this).attr('target', '_blank')
+            }
+        })
+    }
+    // 이미지 크기 조절
+    var $img_markdown = $markdown_body.find("p img")
 
      if ($img_markdown.length > 0) {
          $img_markdown.wrap("<div class='col-md-10'></div>").closest('p').attr('align', 'center')
      }
+     //----------------
 })

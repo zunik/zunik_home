@@ -36,6 +36,9 @@
                     <i class="fa fa-pencil" title="다이어리 작성 날짜"></i> <span title="다이어리 작성 날짜">{{ object.diary_at|date:"Y-m-d" }}</span>
                     <i class="fa fa-cloud-upload pl-2" title="업로드 날짜"></i> <span title="업로드 날짜">{{ object.created_at|date:"Y-m-d" }}</span>
                     <i class="fa fa-eye pl-2" title="조회수"></i> <span title="조회수">{{ object.hit_count.hits }}</span>
+                    <span class="badge badge-warning rss-btn ml-2" title="RSS">
+                        <a href="{% url 'diary:open_latest_feed' %}" target="_blank"><i class="fa fa-rss"></i> RSS</a>
+                    </span>
                 </div>
                 <div class="element-box-content mb-3">
                     <div class="mt-2 markdown-body embed-md-convert">
@@ -141,3 +144,8 @@
         </div>
     </div>
 {%  endblock %}
+
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'js/markdown_custom.js' %}"></script>
+{% endblock %}

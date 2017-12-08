@@ -44,7 +44,7 @@ class MyVideoDetailView(DetailView):
 
         # 조회수
         hit_count = HitCount.objects.get_for_object(context['object'])
-        hit_count_response = HitCountMixin.hit_count(self.request, hit_count)
+        HitCountMixin.hit_count(self.request, hit_count)
 
         relation_num = 8
         context['related_list'] = TaggedItem.objects.get_related(context['object'], Video, relation_num)
@@ -122,7 +122,7 @@ class FavoriteVideoDetailView(DetailView):
 
         # 조회수
         hit_count = HitCount.objects.get_for_object(context['object'])
-        hit_count_response = HitCountMixin.hit_count(self.request, hit_count)
+        HitCountMixin.hit_count(self.request, hit_count)
 
         relation_num = 8
         context['related_list'] = TaggedItem.objects.get_related(context['object'], FavoriteVideo, relation_num)

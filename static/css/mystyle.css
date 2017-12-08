@@ -33,6 +33,7 @@ strong{font-weight:700}
     -webkit-transform: translateX(-5px);
     transform: translateX(-5px);
 }
+
 .menu-side-w ul.sub-menu li a.hover-active:before {
     -webkit-transform: translate(-5px, -50%);
     transform: translate(-5px, -50%);

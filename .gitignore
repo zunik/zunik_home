@@ -3,3 +3,4 @@ node_modules/
 components/
 static/icon_fonts_assets/
 media/
+zunik_home/settings.py

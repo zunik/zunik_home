@@ -125,3 +125,9 @@
         </div>
     {% endif %}
 {%  endblock %}
+
+
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'js/markdown_custom.js' %}"></script>
+{% endblock %}
