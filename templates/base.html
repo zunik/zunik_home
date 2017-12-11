@@ -80,8 +80,16 @@
                 START - Mobile Menu List
                 -------------------->
                 <ul class="main-menu">
+                    <li>
+                        <a href="{% url 'index' %}">
+                            <div class="icon-w">
+                                <div class="fa fa-home"></div>
+                            </div>
+                            <span>Home</span>
+                        </a>
+                    </li>
                     <li class="has-sub-menu">
-                        <a href="index.html">
+                        <a href="{% url 'diary:introduction' %}">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-ui-55"></div>
                             </div>
@@ -89,12 +97,15 @@
                         </a>
                         <ul class="sub-menu">
                             <li>
+                                <a href="{% url 'diary:introduction' %}">Introduction</a>
+                            </li>
+                            <li>
                                 <a href="{% url 'diary:open_list' %}">Open Diary</a>
                             </li>
                         </ul>
                     </li>
                     <li class="has-sub-menu">
-                        <a href="index.html">
+                        <a href="{% url 'video:my_list' %}">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-others-29"></div>
                             </div>
@@ -110,7 +121,7 @@
                         </ul>
                     </li>
                     <li class="has-sub-menu">
-                        <a href="index.html">
+                        <a href="{% url 'photo:my_list' %}">
                             <div class="icon-w">
                                 <div class="os-icon os-icon-documents-07"></div>
                             </div>
@@ -184,6 +195,14 @@
                     </div>
                 </div>
                 <ul class="main-menu">
+                    <li>
+                        <a href="{% url 'index' %}">
+                            <div class="icon-w">
+                                <div class="fa fa-home"></div>
+                            </div>
+                            <span>Home</span>
+                        </a>
+                    </li>
                     <li class="has-sub-menu {% if '/diary/' in request.path %}active{% endif %}">
                         <a href="{% url 'diary:open_list' %}">
                             <div class="icon-w">
@@ -192,6 +211,9 @@
                             <span>Diary</span>
                         </a>
                         <ul class="sub-menu">
+                            <li>
+                                <a href="{% url 'diary:introduction' %}" {% if '/diary/introduction' in request.path %}class="hover-active"{% endif %}>Introduction</a>
+                            </li>
                             <li>
                                 <a href="{% url 'diary:open_list' %}" {% if '/diary/open/' in request.path %}class="hover-active"{% endif %}>Open Diary</a>
                             </li>

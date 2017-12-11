@@ -1,5 +1,6 @@
 from django.views.generic import DetailView, ListView
 from django.contrib.syndication.views import Feed
+from django.shortcuts import render, get_object_or_404, reverse
 from tagging.views import TaggedObjectList
 from tagging.models import TaggedItem, Tag
 from .models import Diary
@@ -77,6 +78,22 @@ class OpenDiaryDetailView(DetailView):
             .exclude(diary_at=context['object'].diary_at, id__gte=context['object'].id).order_by('-diary_at', '-id').first()
 
         return context
+
+
+def open_diary_introduction(request):
+    query = get_object_or_404(Diary, pk=239)
+    full_absolute_url = SITE_DOMAIN + reverse('diary:introduction')
+
+    context = {
+        'object': query,
+        'full_absolute_url': full_absolute_url,
+    }
+
+    # 조회수
+    hit_count = HitCount.objects.get_for_object(query)
+    HitCountMixin.hit_count(request, hit_count)
+
+    return render(request, 'diary/diary_introduction.html', context)
 
 
 class LatestOpenDiaryFeed(Feed):
