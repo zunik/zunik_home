@@ -131,12 +131,6 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Seoul'
 
-#USE_I18N = True
-
-#USE_L10N = True
-
-#USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -145,6 +139,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    ('npm', os.path.join(BASE_DIR, "node_modules"),),
 ]
 
 BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_ROOT, 'components')
@@ -156,7 +151,6 @@ STATICFILES_FINDERS = (
 )
 
 BOWER_INSTALLED_APPS = (
-    "bootstrap#v4.0.0-alpha.6",
     "select2#^4.0.3",
     "ckeditor#^4.6.2",
     "bootstrap-validator#^0.11.9",

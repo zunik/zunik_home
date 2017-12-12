@@ -1,0 +1,25 @@
+{
+  "name": "zunik_home",
+  "version": "1.0.0",
+  "description": "zunik home",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta.2",
+    "popper.js": "^1.12.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zunik/zunik_home.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zunik/zunik_home/issues"
+  },
+  "homepage": "https://github.com/zunik/zunik_home#readme"
+}

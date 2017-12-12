@@ -15,6 +15,7 @@ class Video(models.Model, HitCountMixin):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     hide = models.BooleanField(default=False)
+    recommend = models.BooleanField(default=False)
     tag = TagField()
     hit_count_generic = GenericRelation(
         HitCount, object_id_field='object_pk',

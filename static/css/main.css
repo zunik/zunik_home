@@ -18078,13 +18078,15 @@ Contents:
   .content-i .content-box {
     display: block;
     /* custom zunik (padding:15px) */
-    padding: 0px;
+    padding: 8px;
   }
   .content-i .content-panel {
     padding: 15px;
     border-left: none;
     display: block;
     width: auto;
+    /* custom zunik (add z-index) */
+    z-index:9999999;
   }
   .big-error-w {
     padding: 1rem;
