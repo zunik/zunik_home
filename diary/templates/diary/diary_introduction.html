@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block title %}{{ object.title }}{% endblock %}
 {% block keywords %}{{ object.tag }}{% endblock %}
@@ -10,8 +11,8 @@
 {% block twitter_title %}{{ object.title }}{% endblock %}
 {% block twitter_desc %}{{ object.description }}{% endblock %}
 
-{% block og_image %}{% if object.main_img %}{{ object.get_main_img_url }}{% else %}{{ block.super }}{% endif %}{% endblock %}
-{% block twitter_image %}{% if object.main_img %}{{ object.get_main_img_url }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block og_image %}{% if object.main_img %}{{ SITE_DOMAIN }}{% thumbnail object.get_main_img_url "600x315" crop="center" as im %}{{ im.url }}{% endthumbnail %}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block twitter_image %}{% if object.main_img %}{{ SITE_DOMAIN }}{% thumbnail object.get_main_img_url "600x315" crop="center" as im %}{{ im.url }}{% endthumbnail %}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block breadcrumb %}
     <li class="breadcrumb-item">
