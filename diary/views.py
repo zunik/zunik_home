@@ -102,7 +102,7 @@ class LatestOpenDiaryFeed(Feed):
     link = SITE_DOMAIN + "/diary/open/"
 
     def items(self):
-        return Diary.objects.filter(hide=False)[:5]
+        return Diary.objects.filter(hide=False)[:10]
 
     def item_title(self, item):
         return item.title
@@ -112,3 +112,6 @@ class LatestOpenDiaryFeed(Feed):
 
     def item_link(self, item):
         return SITE_DOMAIN + item.get_absolute_url
+
+    def item_pubdate(self, item):
+        return item.created_at

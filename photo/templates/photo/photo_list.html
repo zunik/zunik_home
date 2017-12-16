@@ -67,7 +67,7 @@
                     </h4>
                     <div class="row mb-3">
                         {% for object in object_list %}
-                            <div class="col-md-4 col-sm-6 col-12 mb-2">
+                            <div class="col-md-4 col-sm-6 col-6 mb-2">
                                 <a href="{{ object.get_absolute_url }}?page={{ page_obj.number }}{% if list_type == 'tag' %}&tag={{ now_tag }}{% endif %}">
                                     <img src="{{ object.thumbnail.url }}" class="img-thumbnail img-fluid" data-placement="bottom" data-toggle="tooltip" title="{{ object.title }}">
                                 </a>
