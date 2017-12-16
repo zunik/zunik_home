@@ -1,6 +1,7 @@
 from django.views.generic import DetailView, ListView
 from django.contrib.syndication.views import Feed
 from django.shortcuts import render, get_object_or_404, reverse
+from django.db.models import Q
 from tagging.views import TaggedObjectList
 from tagging.models import TaggedItem, Tag
 from .models import Diary
@@ -49,11 +50,9 @@ class OpenDiaryDetailView(DetailView):
         hit_count = HitCount.objects.get_for_object(context['object'])
         HitCountMixin.hit_count(self.request, hit_count)
 
+        # 이글을 언급한 글
         object_path = '/diary/open/' + str(context['object'].id) + '/';
         context['mentioned_list'] = Diary.objects.filter(content__icontains=object_path)
-
-        relation_num = 5
-        context['related_list'] = TaggedItem.objects.get_related(context['object'], Diary, relation_num)
 
         # 목록으로 돌아갈시 page
         now_page = self.request.GET.get('page')
@@ -76,6 +75,29 @@ class OpenDiaryDetailView(DetailView):
 
         context['prev_object'] = objects.filter(hide=False).filter(diary_at__lte=context['object'].diary_at)\
             .exclude(diary_at=context['object'].diary_at, id__gte=context['object'].id).order_by('-diary_at', '-id').first()
+
+        # 연관있는 글 (이미 위에서 호출 된것은 제외함)
+
+        filter_list = []
+
+        if context['prev_object']:
+            filter_list.append(context['prev_object'].id)
+
+        if context['next_object']:
+            filter_list.append(context['next_object'].id)
+
+        if context['mentioned_list']:
+            for mentioned in context['mentioned_list']:
+                filter_list.append(mentioned.id)
+
+        objects_filter = Diary.objects
+
+        if filter_list:
+            for object_id in filter_list:
+                objects_filter = objects_filter.filter(~Q(id=object_id))
+
+        relation_num = 5
+        context['related_list'] = TaggedItem.objects.get_related(context['object'], objects_filter, relation_num)
 
         return context
 
