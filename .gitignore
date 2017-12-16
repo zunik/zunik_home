@@ -1,6 +1,8 @@
 __pycache__
 node_modules/
 components/
-static/icon_fonts_assets/
+staticfiles/
 media/
 zunik_home/settings.py
+uwsgi.log
+uwsgi_params

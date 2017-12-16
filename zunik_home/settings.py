@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'eaa@_#*!snd_y915ruxp+!535y*49kt(mwsu1rf)jemf4*w8^y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['dev.zunik.me']
+ALLOWED_HOSTS = ['zunik.me', 'www.zunik.me']
 
 PROJECT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), ".."),
@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     'diary.apps.DiaryConfig',
 ]
 
-DISQUS_WEBSITE_SHORTNAME = 'djangozunik'
+DISQUS_WEBSITE_SHORTNAME = 'zunik-story'
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -135,6 +135,8 @@ TIME_ZONE = 'Asia/Seoul'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -152,22 +154,16 @@ STATICFILES_FINDERS = (
 
 BOWER_INSTALLED_APPS = (
     "select2#^4.0.3",
-    "ckeditor#^4.6.2",
     "bootstrap-validator#^0.11.9",
     "bootstrap-daterangepicker#^2.1.25",
-    "dropzone#^4.3.0",
-    "fullcalendar#^3.4.0",
     "chart.js#^2.6.0",
     "chartist#^0.11.0",
-    "blueimp-file-upload#^9.18.0",
     "editable-table",
     "datatables.net#^1.10.15",
     "datatables.net-bs#^2.1.1",
     "datatables.net-buttons#^1.3.1",
     "datatables.net-buttons-bs#^1.3.1",
     "perfect-scrollbar#^0.7.0",
-    "slick-carousel#^1.6.0",
-    "dragula.js#^3.7.2",
     "tether#^1.4.0",
     "github-markdown-css"
 )
@@ -184,4 +180,4 @@ MARKDOWN_DEUX_STYLES = {
     },
 }
 
-SITE_DOMAIN = 'http://dev.zunik.me:8000'
+SITE_DOMAIN = 'http://zunik.me'
