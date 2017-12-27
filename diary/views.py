@@ -52,7 +52,7 @@ class OpenDiaryDetailView(DetailView):
 
         # 이글을 언급한 글
         object_path = '/diary/open/' + str(context['object'].id) + '/';
-        context['mentioned_list'] = Diary.objects.filter(content__icontains=object_path)
+        context['mentioned_list'] = Diary.objects.filter(hide=False).filter(content__icontains=object_path)
 
         # 목록으로 돌아갈시 page
         now_page = self.request.GET.get('page')
