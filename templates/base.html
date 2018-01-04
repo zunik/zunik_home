@@ -22,6 +22,7 @@
     <meta name="twitter:url" content="{{ SITE_DOMAIN }}{{ request.path }}" />
     <meta name="twitter:image" content="{% block twitter_image %}{{ SITE_DOMAIN }}/media/photo/other/main_thumbnail.jpg{% endblock %}" />
 
+    <link href="{{ SITE_DOMAIN }}{{ request.path }}" rel="canonical" />
     <!-- static -->
     {% load static %}
     <link href="{% static 'img/favicon.png' %}" rel="shortcut icon">
