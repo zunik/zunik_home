@@ -53,7 +53,7 @@ class MyPhotoDetailView(DetailView):
 
         # tags 관련 컨텐츠 뽑아도 개수에 충족하지 못 한다면 최근거에서 부족한 만큼 가져오기
         if relation_plus_count != 0:
-            context['related_list'].extend(Photo.objects.exclude(pk=context['object'].id).all()[:relation_plus_count])
+            context['related_list'].extend(Photo.objects.filter(hide=False).exclude(pk=context['object'].id).all()[:relation_plus_count])
 
         # 중복제거
         context['related_list'] = list(set(context['related_list']))

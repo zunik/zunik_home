@@ -53,7 +53,7 @@ class MyVideoDetailView(DetailView):
 
         # tags 관련 영상을 뽑아도 개수에 충족하지 못 한다면 최근거에서 부족한 만큼 가져오기
         if relation_plus_count != 0:
-            context['related_list'].extend(Video.objects.exclude(pk=context['object'].id).all()[:relation_plus_count])
+            context['related_list'].extend(Video.objects.filter(hide=False).exclude(pk=context['object'].id).all()[:relation_plus_count])
 
         context['related_list'] = list(set(context['related_list']))
 
@@ -131,7 +131,7 @@ class FavoriteVideoDetailView(DetailView):
 
         # tags 관련 영상을 뽑아도 개수에 충족하지 못 한다면 최근거에서 부족한 만큼 가져오기
         if relation_plus_count != 0:
-            context['related_list'].extend(FavoriteVideo.objects.exclude(pk=context['object'].id).all()[:relation_plus_count])
+            context['related_list'].extend(FavoriteVideo.objects.filter(hide=False).exclude(pk=context['object'].id).all()[:relation_plus_count])
 
         context['related_list'] = list(set(context['related_list']))
 
