@@ -115,6 +115,7 @@
                                     </li>
                                     <li>
                                         {{ related_object.created_at|date:"Y-m-d" }}
+                                        <i class="fa fa-eye pl-2" title="조회수"></i> <span title="조회수">{{ related_object.hit_count.hits }}</span>
                                     </li>
                                 </ul>
                             </div>
