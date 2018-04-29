@@ -48,12 +48,7 @@ $(function(){
     var $markdown_a = $markdown_body.find('a')
 
     if ($markdown_a.length != 0) {
-        $markdown_a.each(function (index) {
-            var href = $(this).attr('href')
-            if (href.indexOf('/diary/open/') == -1) {
-                $(this).attr('target', '_blank')
-            }
-        })
+    	$markdown_a.attr('target', '_blank')
     }
     // 이미지 크기 조절
     var $img_markdown = $markdown_body.find("p img")

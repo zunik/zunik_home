@@ -59,6 +59,8 @@ INSTALLED_APPS = [
 DISQUS_WEBSITE_SHORTNAME = 'zunik-story'
 SITE_ID = 1
 
+HITCOUNT_KEEP_HIT_IN_DATABASE = {'days':30}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
