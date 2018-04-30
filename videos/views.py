@@ -1,4 +1,5 @@
 from django.views.generic import DetailView, ListView
+from django.db.models import Q
 from tagging.views import TaggedObjectList
 from tagging.models import TaggedItem, Tag
 from .models import Video, FavoriteVideo
@@ -8,7 +9,6 @@ from hitcount.views import HitCountMixin
 
 
 class MyVideoListView(ListView):
-    queryset = Video.objects.filter(hide=False)
     paginate_by = 15
     template_name = 'videos/video_list.html'
 
@@ -19,6 +19,15 @@ class MyVideoListView(ListView):
 
         context['list_type'] = 'all'
         return context
+
+    def get_queryset(self):
+        queryset_list = Video.objects.filter(hide=False)
+
+        query = self.request.GET.get('q')
+        if query:
+            queryset_list = queryset_list.filter(Q(title__icontains=query)).distinct()
+
+        return queryset_list
 
 
 class MyVideoTagView(TaggedObjectList):
@@ -73,11 +82,17 @@ class MyVideoDetailView(DetailView):
         else:
             objects = Video.objects
 
-        context['next_object'] = objects.filter(hide=False).filter(video_at__gte=context['object'].video_at) \
+            query = self.request.GET.get('q')
+            if query:
+                objects = objects.filter(Q(title__icontains=query)).distinct()
+
+        objects = objects.filter(hide=False)
+
+        context['next_object'] = objects.filter(video_at__gte=context['object'].video_at) \
             .exclude(video_at=context['object'].video_at, id__lte=context['object'].id).order_by('-video_at', '-id') \
             .last()
 
-        context['prev_object'] = objects.filter(hide=False).filter(video_at__lte=context['object'].video_at) \
+        context['prev_object'] = objects.filter(video_at__lte=context['object'].video_at) \
             .exclude(video_at=context['object'].video_at, id__gte=context['object'].id).order_by('-video_at', '-id') \
             .first()
 

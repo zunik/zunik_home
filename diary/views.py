@@ -12,7 +12,6 @@ from hitcount.views import HitCountMixin
 
 
 class OpenDiaryListView(ListView):
-    queryset = Diary.objects.filter(hide=False)
     paginate_by = 10
     template_name = 'diary/diary_list.html'
 
@@ -23,6 +22,18 @@ class OpenDiaryListView(ListView):
 
         context['list_type'] = 'all'
         return context
+
+    def get_queryset(self):
+        queryset_list = Diary.objects.filter(hide=False)
+
+        query = self.request.GET.get('q')
+        if query:
+            queryset_list = queryset_list.filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query)
+            ).distinct()
+
+        return queryset_list
 
 
 class OpenDiaryTagView(TaggedObjectList):
@@ -70,10 +81,19 @@ class OpenDiaryDetailView(DetailView):
         else:
             objects = Diary.objects
 
-        context['next_object'] = objects.filter(hide=False).filter(diary_at__gte=context['object'].diary_at)\
+            query = self.request.GET.get('q')
+            if query:
+                objects = objects.filter(
+                    Q(title__icontains=query) |
+                    Q(content__icontains=query)
+                ).distinct()
+
+        objects = objects.filter(hide=False)
+
+        context['next_object'] = objects.filter(diary_at__gte=context['object'].diary_at)\
             .exclude(diary_at=context['object'].diary_at, id__lte=context['object'].id).order_by('-diary_at', '-id').last()
 
-        context['prev_object'] = objects.filter(hide=False).filter(diary_at__lte=context['object'].diary_at)\
+        context['prev_object'] = objects.filter(diary_at__lte=context['object'].diary_at)\
             .exclude(diary_at=context['object'].diary_at, id__gte=context['object'].id).order_by('-diary_at', '-id').first()
 
         # 연관있는 글 (이미 위에서 호출 된것은 제외함)
