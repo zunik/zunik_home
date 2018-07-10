@@ -5,6 +5,7 @@ node_modules/
 components/
 staticfiles/
 media/
+venv/
 .idea/
 
 uwsgi.log
