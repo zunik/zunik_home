@@ -10,22 +10,36 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os
+import os, json
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+secret_file = os.path.join(BASE_DIR, 'secrets.json')
+
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'eaa@_#*!snd_y915ruxp+!535y*49kt(mwsu1rf)jemf4*w8^y'
+SECRET_KEY = get_secret("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = get_secret("DEBUG")
 
-ALLOWED_HOSTS = ['zunik.me', 'www.zunik.me']
+ALLOWED_HOSTS = get_secret("ALLOWED_HOSTS")
 
 PROJECT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), ".."),
@@ -56,7 +70,7 @@ INSTALLED_APPS = [
     'diary.apps.DiaryConfig',
 ]
 
-DISQUS_WEBSITE_SHORTNAME = 'zunik-story'
+DISQUS_WEBSITE_SHORTNAME = get_secret("DISQUS_WEBSITE_SHORTNAME")
 SITE_ID = 1
 
 HITCOUNT_KEEP_HIT_IN_DATABASE = {'days':30}
@@ -99,9 +113,9 @@ WSGI_APPLICATION = 'zunik_home.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'zunik_story',
-        'USER' : 'chazunik',
-        'PASSWORD' : 'Ddatabase12#$',
+        'NAME' : get_secret("DB_NAME"),
+        'USER' : get_secret("DB_USER"),
+        'PASSWORD' : get_secret("DB_PASSWORD"),
         'HOST' : '127.0.0.1'
     }
 }

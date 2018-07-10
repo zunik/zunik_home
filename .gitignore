@@ -1,8 +1,10 @@
 __pycache__
+
 node_modules/
 components/
 staticfiles/
 media/
-zunik_home/settings.py
+.idea/
+
 uwsgi.log
 uwsgi_params
