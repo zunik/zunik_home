@@ -27,8 +27,8 @@ class Photo(models.Model, HitCountMixin):
         format = 'JPEG',
         options = {'quality': 60}
     )
-    height_field = models.IntegerField(default=0)
-    width_field = models.IntegerField(default=0)
+    height_field = models.IntegerField(default=0, null=True)
+    width_field = models.IntegerField(default=0, null=True)
     photo_at = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -62,8 +62,8 @@ class Photo(models.Model, HitCountMixin):
 class OtherPhoto(models.Model):
     title = models.CharField(max_length=200)
     photo = models.ImageField(upload_to=file_rename_other, width_field="width_field", height_field="height_field")
-    height_field = models.IntegerField(default=0)
-    width_field = models.IntegerField(default=0)
+    height_field = models.IntegerField(default=0, null=True)
+    width_field = models.IntegerField(default=0, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
