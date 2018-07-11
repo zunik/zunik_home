@@ -196,4 +196,4 @@ MARKDOWN_DEUX_STYLES = {
     },
 }
 
-SITE_DOMAIN = 'http://zunik.me'
+SITE_DOMAIN = get_secret("SITE_DOMAIN")
