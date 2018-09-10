@@ -1,0 +1,12 @@
+version: '3'
+services:
+  db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=akfnzh123
+    image : "mariadb:10.2"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./datadir:/var/lib/mysql
+    networks:
+      - default

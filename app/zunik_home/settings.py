@@ -185,7 +185,7 @@ BOWER_INSTALLED_APPS = (
 )
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 
 MARKDOWN_DEUX_STYLES = {
     "default": {
