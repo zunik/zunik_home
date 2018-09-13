@@ -1,4 +1,27 @@
-FROM python:3.6
+FROM ubuntu:18.04
 
-MAINTAINER Zunik <zunik@gmail.com>
+MAINTAINER Zunik <chazunik@gmail.com>
 
+RUN apt-get update
+RUN apt-get install -y git python3 python3-pip npm libmysqlclient-dev
+
+RUN mkdir /root/.ssh/
+
+ADD id_rsa /root/.ssh/id_rsa
+RUN touch /root/.ssh/known_hosts
+RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
+
+RUN git clone git@github.com:zunik/zunik_home.git
+
+WORKDIR /zunik_home
+
+RUN git checkout dockerize
+
+WORKDIR /zunik_home/app
+
+COPY app/secrets.json /zunik_home/app/secrets.json
+
+RUN pip3 install -r requirements.txt
+RUN npm install -g bower
+RUN npm install
+RUN python3 manage.py bower_install --allow-root

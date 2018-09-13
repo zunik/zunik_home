@@ -2,11 +2,14 @@ version: '3'
 services:
   db:
     environment:
-      - MYSQL_ROOT_PASSWORD=akfnzh123
-    image : "mariadb:10.2"
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    image: "mariadb:10.2"
     ports:
       - "3306:3306"
     volumes:
       - ./datadir:/var/lib/mysql
-    networks:
-      - default
+      - ./db_conf:/etc/mysql/conf.d
+  django_app:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile_app

@@ -12,3 +12,4 @@ datadir/
 uwsgi.log
 uwsgi_params
 .python-version
+.env
