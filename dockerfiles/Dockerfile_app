@@ -19,8 +19,6 @@ RUN git checkout dockerize
 
 WORKDIR /zunik_home/app
 
-COPY app/secrets.json /zunik_home/app/secrets.json
-
 RUN pip3 install -r requirements.txt
 RUN npm install -g bower
 RUN npm install
