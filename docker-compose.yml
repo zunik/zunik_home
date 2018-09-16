@@ -13,16 +13,20 @@ services:
   django_app:
     build:
       context: .
-      dockerfile: dockerfiles/Dockerfile_app
+      dockerfile: Dockerfile_app
+      args:
+        - SECRET_KEY=${SECRET_KEY}
+        - DEBUG=${DEBUG}
+        - DB_HOST=${DB_HOST}
+        - DB_NAME=${DB_NAME}
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
+        - SITE_DOMAIN=${SITE_DOMAIN}
+        - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+        - DISQUS_WEBSITE_SHORTNAME=${DISQUS_WEBSITE_SHORTNAME}
     ports:
       - "8000:8000"
-    environment:
-      - SECRET_KEY=${SECRET_KEY}
-      - DEBUG=${DEBUG}
-      - DB_HOST=${DB_HOST}
-      - DB_NAME=${DB_NAME}
-      - DB_NAME=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
-      - DISQUS_WEBSITE_SHORTNAME=${DISQUS_WEBSITE_SHORTNAME}
+    volumes:
+      - ./media:/zunik_home/media
+      - ./staticfiles:/zunik_home/staticfiles
 
