@@ -2,7 +2,8 @@ version: '3'
 services:
   db:
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=zunik_story
     image: "mariadb:10.2"
     ports:
       - "3306:3306"
@@ -13,3 +14,15 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile_app
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=${DEBUG}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_NAME=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - DISQUS_WEBSITE_SHORTNAME=${DISQUS_WEBSITE_SHORTNAME}
+
