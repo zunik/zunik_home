@@ -10,7 +10,19 @@ services:
     volumes:
       - ./datadir:/var/lib/mysql
       - ./db_conf:/etc/mysql/conf.d
-  django_app:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./media:/var/www/media
+      - ./staticfiles:/var/www/static
+    command: nginx -g 'daemon off;'
+    depends_on:
+      - web
+  web:
     build:
       context: .
       dockerfile: Dockerfile_app
@@ -24,9 +36,10 @@ services:
         - SITE_DOMAIN=${SITE_DOMAIN}
         - ALLOWED_HOSTS=${ALLOWED_HOSTS}
         - DISQUS_WEBSITE_SHORTNAME=${DISQUS_WEBSITE_SHORTNAME}
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     volumes:
       - ./media:/zunik_home/media
       - ./staticfiles:/zunik_home/staticfiles
-
+    depends_on:
+      - db

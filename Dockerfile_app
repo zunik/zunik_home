@@ -41,6 +41,5 @@ ENV SECRET_KEY=${SECRET_KEY} \
 RUN pip3 install -r requirements.txt
 RUN npm install -g bower && npm install
 RUN python3 manage.py bower_install --allow-root
-RUN python3 manage.py collectstatic
 
 ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:8000", "zunik_home.wsgi:application"]
