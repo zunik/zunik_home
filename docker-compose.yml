@@ -3,7 +3,7 @@ services:
   db:
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-      - MYSQL_DATABASE=zunik_story
+      - MYSQL_DATABASE=${DB_NAME}
       - TZ=Asia/Seoul
     image: "mariadb:10.2"
     ports:
