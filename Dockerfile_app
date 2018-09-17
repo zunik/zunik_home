@@ -1,8 +1,9 @@
-FROM ubuntu:18.04
+FROM python:3.6
 
 MAINTAINER Zunik <chazunik@gmail.com>
 
-RUN apt-get update && apt-get install -y git python3 python3-pip npm libmysqlclient-dev
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt-get update && apt-get install -y npm
 
 COPY ./app /zunik_home/app
 
@@ -28,8 +29,8 @@ ENV SECRET_KEY=${SECRET_KEY} \
     ALLOWED_HOSTS=${ALLOWED_HOSTS} \
     DISQUS_WEBSITE_SHORTNAME=${DISQUS_WEBSITE_SHORTNAME}
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 RUN npm install -g bower && npm install
-RUN python3 manage.py bower_install --allow-root
+RUN python manage.py bower_install --allow-root
 
 ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:8000", "zunik_home.wsgi:application"]
