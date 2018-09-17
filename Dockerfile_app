@@ -4,17 +4,7 @@ MAINTAINER Zunik <chazunik@gmail.com>
 
 RUN apt-get update && apt-get install -y git python3 python3-pip npm libmysqlclient-dev
 
-RUN mkdir /root/.ssh/
-
-ADD id_rsa /root/.ssh/id_rsa
-RUN touch /root/.ssh/known_hosts
-RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
-
-RUN git clone git@github.com:zunik/zunik_home.git
-
-WORKDIR /zunik_home
-
-RUN git checkout dockerize
+COPY ./app /zunik_home/app
 
 WORKDIR /zunik_home/app
 
