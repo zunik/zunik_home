@@ -1,0 +1,50 @@
+version: '3'
+services:
+  db:
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+      - TZ=Asia/Seoul
+    image: "mariadb:10.2"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./datadir:/var/lib/mysql
+      - ./db_conf:/etc/mysql/conf.d
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile_nginx
+    ports:
+      - "80:80"
+    environment:
+      - TZ=Asia/Seoul
+    volumes:
+      - ./media:/var/www/media
+      - ./staticfiles:/var/www/static
+    command: nginx -g 'daemon off;'
+    depends_on:
+      - web
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile_app
+      args:
+        - SECRET_KEY=${SECRET_KEY}
+        - DEBUG=${DEBUG}
+        - DB_HOST=${DB_HOST}
+        - DB_NAME=${DB_NAME}
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
+        - SITE_DOMAIN=${SITE_DOMAIN}
+        - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+        - DISQUS_WEBSITE_SHORTNAME=${DISQUS_WEBSITE_SHORTNAME}
+    expose:
+      - "8000"
+    environment:
+      - TZ=Asia/Seoul
+    volumes:
+      - ./media:/zunik_home/media
+      - ./staticfiles:/zunik_home/staticfiles
+    depends_on:
+      - db

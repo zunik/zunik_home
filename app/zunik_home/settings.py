@@ -10,36 +10,23 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os, json
+import os
+import json
 from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-secret_file = os.path.join(BASE_DIR, 'secrets.json')
-
-with open(secret_file) as f:
-    secrets = json.loads(f.read())
-
-
-def get_secret(setting, secrets=secrets):
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = "Set the {} environment variable".format(setting)
-        raise ImproperlyConfigured(error_msg)
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_secret("SECRET_KEY")
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_secret("DEBUG")
+DEBUG = bool(int(os.environ['DEBUG']))
 
-ALLOWED_HOSTS = get_secret("ALLOWED_HOSTS")
+ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(',')
 
 PROJECT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), ".."),
@@ -70,8 +57,9 @@ INSTALLED_APPS = [
     'diary.apps.DiaryConfig',
 ]
 
-DISQUS_WEBSITE_SHORTNAME = get_secret("DISQUS_WEBSITE_SHORTNAME")
+DISQUS_WEBSITE_SHORTNAME = os.environ["DISQUS_WEBSITE_SHORTNAME"]
 SITE_ID = 1
+
 
 HITCOUNT_KEEP_HIT_IN_DATABASE = {'days':30}
 
@@ -113,10 +101,10 @@ WSGI_APPLICATION = 'zunik_home.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : get_secret("DB_NAME"),
-        'USER' : get_secret("DB_USER"),
-        'PASSWORD' : get_secret("DB_PASSWORD"),
-        'HOST' : get_secret("DB_HOST")
+        'NAME' : os.environ["DB_NAME"],
+        'USER' : os.environ['DB_USER'],
+        'PASSWORD' : os.environ['DB_PASSWORD'],
+        'HOST' : os.environ['DB_HOST']
     }
 }
 
@@ -151,7 +139,7 @@ TIME_ZONE = 'Asia/Seoul'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, '../staticfiles')
 
 STATIC_URL = '/static/'
 
@@ -185,7 +173,7 @@ BOWER_INSTALLED_APPS = (
 )
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 
 MARKDOWN_DEUX_STYLES = {
     "default": {
@@ -196,4 +184,4 @@ MARKDOWN_DEUX_STYLES = {
     },
 }
 
-SITE_DOMAIN = get_secret("SITE_DOMAIN")
+SITE_DOMAIN = os.environ["SITE_DOMAIN"]

@@ -1,12 +1,12 @@
 __pycache__
 
-secrets.json
 node_modules/
 components/
 staticfiles/
 media/
 venv/
+datadir/
 .idea/
 
-uwsgi.log
-uwsgi_params
+.python-version
+.env
