@@ -6,6 +6,7 @@ staticfiles/
 media/
 venv/
 datadir/
+data/
 .idea/
 
 .python-version
