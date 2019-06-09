@@ -17,11 +17,14 @@ services:
       dockerfile: dockerfiles/Dockerfile_nginx
     ports:
       - "80:80"
+      - "443:443"
     environment:
       - TZ=Asia/Seoul
     volumes:
       - ./media:/var/www/media
       - ./staticfiles:/var/www/static
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     command: nginx -g 'daemon off;'
     depends_on:
       - web
