@@ -47,7 +47,7 @@ class MyPhotoDetailView(DetailView):
         HitCountMixin.hit_count(self.request, hit_count)
 
         relation_num = 8
-        context['related_list'] = TaggedItem.objects.get_related(context['object'], Photo, relation_num)
+        context['related_list'] = TaggedItem.objects.get_related(context['object'], self.queryset, relation_num)
 
         relation_plus_count = relation_num - len(context['related_list'])
 

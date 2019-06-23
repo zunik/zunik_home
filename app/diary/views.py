@@ -110,7 +110,7 @@ class OpenDiaryDetailView(DetailView):
             for mentioned in context['mentioned_list']:
                 filter_list.append(mentioned.id)
 
-        objects_filter = Diary.objects
+        objects_filter = self.queryset
 
         if filter_list:
             for object_id in filter_list:
