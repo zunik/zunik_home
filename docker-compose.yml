@@ -14,7 +14,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: dockerfiles/Dockerfile_nginx
+      dockerfile: dockerfiles/nginx.Dockerfile
     ports:
       - "80:80"
       - "443:443"
@@ -31,7 +31,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: dockerfiles/Dockerfile_app
+      dockerfile: dockerfiles/web.Dockerfile
       args:
         - SECRET_KEY=${SECRET_KEY}
         - DEBUG=${DEBUG}
