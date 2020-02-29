@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.6.6
 
 MAINTAINER Zunik <chazunik@gmail.com>
 
@@ -28,6 +28,8 @@ ENV SECRET_KEY=${SECRET_KEY} \
     SITE_DOMAIN=${SITE_DOMAIN} \
     ALLOWED_HOSTS=${ALLOWED_HOSTS} \
     DISQUS_WEBSITE_SHORTNAME=${DISQUS_WEBSITE_SHORTNAME}
+
+ENV TZ Asia/Seoul
 
 RUN pip install -r requirements.txt
 RUN npm install -g bower && npm install
