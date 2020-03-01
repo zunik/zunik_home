@@ -42,7 +42,7 @@ services:
         - SITE_DOMAIN=${SITE_DOMAIN}
         - ALLOWED_HOSTS=${ALLOWED_HOSTS}
         - DISQUS_WEBSITE_SHORTNAME=${DISQUS_WEBSITE_SHORTNAME}
-    image: "chazunik/zunik_home_web"
+    image: "chazunik/zunik_home_web:dev2"
     ports:
       - "8000:8000"
     volumes:
