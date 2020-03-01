@@ -1,0 +1,43 @@
+apiVersion: v1
+metadata:
+  name: nginx-cnf
+  namespace: zunik-me
+kind: ConfigMap
+data:
+  nginx.conf: |
+    worker_processes 1;
+
+    events {
+        worker_connections 1024;
+    }
+
+    http {
+        include /etc/nginx/mime.types;
+        client_max_body_size 100M;
+
+        server {
+            listen 80 default_server;
+            charset utf-8;
+            server_name zunik.me;
+
+            access_log /dev/stdout;
+            error_log /dev/stdout info;
+
+            location /media/ {
+                alias /var/www/media/;
+            }
+
+            location /static/ {
+                alias /var/www/static/;
+            }
+
+            location / {
+                proxy_pass http://localhost:8000;
+                proxy_set_header    Host $host;
+                proxy_set_header    X-Real-IP $remote_addr;
+                proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header    X-Forwarded-Host $server_name;
+            }
+        }
+    }
+

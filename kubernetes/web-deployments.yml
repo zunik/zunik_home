@@ -16,6 +16,23 @@ spec:
         app: web
     spec:
       containers:
+        - name: nginx
+          image: "nginx:1.15"
+          ports:
+            - containerPort: 80
+          env:
+            - name: TZ
+              value: "Asia/Seoul"
+          volumeMounts:
+            - mountPath: "/etc/nginx/nginx.conf"
+              name: nginxcnf
+              subPath: nginx.conf
+            - mountPath: "/var/www/media"
+              name: staticfiles
+              subPath: media
+            - mountPath: "/var/www/static"
+              name: staticfiles
+              subPath: staticfiles
         - name: web
           image: "chazunik/zunik_home_web:dev2"
           ports:
@@ -33,3 +50,8 @@ spec:
         - name: staticfiles
           persistentVolumeClaim:
             claimName: zunik-me-staticfile
+        - name: nginxcnf
+          configMap:
+            name: nginx-cnf
+      nodeSelector:
+        kubernetes.io/hostname: pool-d4b8knhi3-0ybi
