@@ -11,3 +11,4 @@ data/
 
 .python-version
 .env
+.env_*

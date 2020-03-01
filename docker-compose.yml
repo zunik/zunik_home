@@ -14,7 +14,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: dockerfiles/Dockerfile_nginx
+      dockerfile: dockerfiles/nginx.Dockerfile
     ports:
       - "80:80"
       - "443:443"
@@ -23,15 +23,13 @@ services:
     volumes:
       - ./media:/var/www/media
       - ./staticfiles:/var/www/static
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
     command: nginx -g 'daemon off;'
     depends_on:
       - web
   web:
     build:
       context: .
-      dockerfile: dockerfiles/Dockerfile_app
+      dockerfile: dockerfiles/web.Dockerfile
       args:
         - SECRET_KEY=${SECRET_KEY}
         - DEBUG=${DEBUG}
@@ -42,12 +40,9 @@ services:
         - SITE_DOMAIN=${SITE_DOMAIN}
         - ALLOWED_HOSTS=${ALLOWED_HOSTS}
         - DISQUS_WEBSITE_SHORTNAME=${DISQUS_WEBSITE_SHORTNAME}
-    expose:
-      - "8000"
-    environment:
-      - TZ=Asia/Seoul
+    image: "chazunik/zunik_home_web:dev2"
+    ports:
+      - "8000:8000"
     volumes:
       - ./media:/zunik_home/media
       - ./staticfiles:/zunik_home/staticfiles
-    depends_on:
-      - db

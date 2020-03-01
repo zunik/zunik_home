@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: zunik-me
+  labels:
+    app: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: nginx
+          image: "nginx:1.15"
+          ports:
+            - containerPort: 80
+          env:
+            - name: TZ
+              value: "Asia/Seoul"
+          volumeMounts:
+            - mountPath: "/etc/nginx/nginx.conf"
+              name: nginxcnf
+              subPath: nginx.conf
+            - mountPath: "/var/www/media"
+              name: staticfiles
+              subPath: media
+            - mountPath: "/var/www/static"
+              name: staticfiles
+              subPath: staticfiles
+        - name: web
+          image: "chazunik/zunik_home_web:dev2"
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - mountPath: "/zunik_home/media"
+              name: staticfiles
+              subPath: media
+            - mountPath: "/zunik_home/staticfiles"
+              name: staticfiles
+              subPath: staticfiles
+      imagePullSecrets:
+        - name: hub-docker.default
+      volumes:
+        - name: staticfiles
+          persistentVolumeClaim:
+            claimName: zunik-me-staticfile
+        - name: nginxcnf
+          configMap:
+            name: nginx-cnf
+      nodeSelector:
+        kubernetes.io/hostname: pool-d4b8knhi3-0ybi
