@@ -9,6 +9,8 @@ spec:
   containers:
     - name: db
       image: "mariadb:10.2"
+      ports:
+        - containerPort: 3306
       env:
         - name: TZ
           value: "Asia/Seoul"
@@ -31,3 +33,5 @@ spec:
     - name: dbcnf
       configMap:
         name: db-cnf
+  nodeSelector:
+    kubernetes.io/hostname: pool-d4b8knhi3-0ybi
