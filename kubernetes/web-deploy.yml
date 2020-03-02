@@ -79,7 +79,7 @@ spec:
               name: staticfiles
               subPath: staticfiles
         - name: web
-          image: "chazunik/zunik_home_web:dev2"
+          image: "chazunik/zunik_home_web:dev3"
           ports:
             - containerPort: 8000
           volumeMounts:
