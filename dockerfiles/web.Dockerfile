@@ -5,9 +5,9 @@ MAINTAINER Zunik <chazunik@gmail.com>
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get update && apt-get install -y npm
 
-COPY ./app /zunik_home/app
-
-WORKDIR /zunik_home/app
+COPY ./requirements.txt /zunik_home/requirements.txt
+WORKDIR /zunik_home
+RUN pip install -r requirements.txt
 
 ARG SECRET_KEY
 ARG DEBUG
@@ -31,7 +31,9 @@ ENV SECRET_KEY=${SECRET_KEY} \
 
 ENV TZ Asia/Seoul
 
-RUN pip install -r requirements.txt
+COPY ./app /zunik_home/app
+WORKDIR /zunik_home/app
+
 RUN npm install -g bower && npm install
 RUN python manage.py bower_install --allow-root
 

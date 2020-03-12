@@ -13,11 +13,11 @@ metadata:
 spec:
   tls:
     - hosts:
-      - zunik.me
+      - archive.zunik.me
       - www.zunik.me
       secretName: zunik-me-tls
   rules:
-    - host: zunik.me
+    - host: archive.zunik.me
       http:
         paths:
           - backend:
